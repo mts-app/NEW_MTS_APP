@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type">
+    <meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/semantic.css">
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		function getUrlVars()
+		{
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++)
+			{
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			return vars;
+		}
+        
+		var client_id;
+		var Client_Name;
+		$( document ).ready(function() {
+			client_id = getUrlVars()["clientid"];
+			Client_Name = getUrlVars()["ClientName"];
+			if(Client_Name != ""){
+				$('#welcome_txt').html("Welcome <span style=color:blue>"+Client_Name+"!</span>");
+			}			
+		 });
+        function getReportNo(){  
+			$('#report_result').hide();
+			$('#report_row').html("");
+			var select_date = $('#datepicker').val();
+			if(select_date == ""){
+				alert("You did not select any date!");
+				return false;
+			}			
+            var date_select_url = "http://14.140.163.70:151/WebService.asmx/ReportResult?date="+select_date+"&clientid="+client_id;			
+            $.ajax({ 
+                type: 'GET',
+                url: date_select_url,                   
+                success:function (data) {					
+					$(data).each(function() {						
+						if(this.report_status == '0'){
+							$('#report_result').hide();
+							$('#report_row').html("");
+							$('#no_records').show();						
+							$('#no_records').html("<span style='color:red'>No Record Found!</span>");
+						}else{
+							$('#no_records').hide();
+							$('#no_records').html("");
+							$('#report_result').show();						
+							$('#report_row').append("<tr><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"'>"+this.Report_Number+"</a></td><td>"+this.Result+"</td></tr>");
+						}						 
+					});                    
+                },
+            });        
+        }
+    </script>
+</head>
+<body>
+	<header>
+		<figure>
+			<a href=""><img src="img/mts.png" alt=""/></a>
+		</figure>
+	</header>
+	<main>
+		<div class="container">
+			<div style="float:right" id="welcome_txt"></div>
+			<div class="align-center">
+				<div class="ui warning form">
+				    <div class="field">
+				    	<label for="">Enter date to search reports...</label>
+				    	<div class="ui action input input-append date">
+						  <input type="text" placeholder="mm/dd/yyyy" id="datepicker">						 
+						</div><br/>
+						 <div class="ui green button" onclick="getReportNo();">Search</div>
+				    </div>
+				</div>
+				<div id="no_records" style="display:none">
+				</div>				
+				<table class="ui unstackable table" id="report_result" style="display:none">
+				  <thead>
+				    <tr>
+				      <th><div id="report_no">Report No.</div></th> 
+				      <th>Status</th>
+				    </tr>
+				  </thead>
+				  <tbody id="report_row">			   	   
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+	<footer><p class="align-center text-muted">Copyright &copy; 2013 Modern Testing Services (Global) Ltd. <br>All rights reserved</p></footer>
+	
+	<script src="js/semantic.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script>
+		$(function() {
+		    $('#datepicker').datepicker();
+		  });
+	</script>
+</body>
+</html>

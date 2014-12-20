@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type">
+    <meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/semantic.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		function getUrlVars()
+		{
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++)
+			{
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			return vars;
+		}		
+		
+		$( document ).ready(function() {			
+			var report_number = getUrlVars()["report_no"];
+			var client_name = getUrlVars()["clientname"];			
+			if(client_name != ""){
+				$('#welcome_text').html("Welcome <span style=color:blue>"+client_name+"!</span>");
+			} 
+			var back_url = "selectdate.html?ClientName="+client_name;
+			$('#back_btn').attr('href',back_url);	
+            var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;			
+            $.ajax({
+                type: 'GET',
+                url: test_result_url,                 
+                success:function (data) {
+					
+					$(data).each(function() {
+						$('#report_no_for').html("Report Number "+report_number);
+						if(this.test_status == '0'){
+							$('#test_result_row').hide();
+							$('#test_result').html("");
+							$('#no_test_result').show();						
+							$('#no_test_result').html("<span style='color:red'>No Record Found!<br/><br/></span>");
+						}else{						
+							var RATING;							
+							$('#no_test_result').hide();
+							$('#no_test_result').html("");
+							$('#test_result_row').show();
+							var RATING;
+							if(this.Result == 'FAIL'){
+								RATING = this.Result +" ("+this.Rating+")";
+							}else{
+								RATING = this.Result;
+							}							
+							$('#test_result').append("<tr><td>"+this.Test_Name+"</td><td>"+RATING+"</td></tr>");
+						}						 
+					});                    
+                },
+					
+            });        
+        });
+    </script>
+</head>
+<body>
+	<header>
+		<figure>
+			<a href=""><img src="img/mts.png" alt=""/></a>
+		</figure>
+	</header>
+	<main>
+		<div class="container">
+			<div style="float:right" id="welcome_text"></div>
+			<div class="align-center">
+				<div class="ui warning form">
+				    <div class="field">
+				    	 <label for="" id="report_no_for"></label>
+				    </div>
+				</div>
+				<div id="no_test_result" style="display:none">
+				</div>
+				<table class="ui unstackable table" id="test_result_row" style="display:none">
+				  <thead>
+				    <tr>
+				      <th>Test name</th>
+				      <th>Result</th>
+				    </tr>
+				  </thead>
+				  <tbody id="test_result">				   			    
+				  </tbody>
+				</table>
+				<a href="" class="ui positive button" id="back_btn">&lsaquo; &nbsp;Back</a>
+			</div>
+		</div>
+	</main>
+	<footer><p class="align-center text-muted">Copyright &copy; 2013 Modern Testing Services (Global) Ltd. <br>All rights reserved</p></footer>	
+	<script src="js/semantic.js"></script>
+</body>
+</html>
