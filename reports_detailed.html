@@ -26,11 +26,12 @@
 		$( document ).ready(function() {
 			
 	    var report_number = getUrlVars()["report_no"];
+		var client_id = getUrlVars()["clientid"];
 	    var client_name = getUrlVars()["clientname"];
 	    if(client_name != ""){
 		$('#welcome_text').html("Welcome <span style=color:blue>"+client_name+"!</span>");
 	    } 
-	    var back_url = "selectdate.html?ClientName="+client_name;
+	    var back_url = "selectdate.html?ClientName="+client_name+"&clientid="+client_id;
 	    $('#back_btn').attr('href',back_url);
             var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
 			
