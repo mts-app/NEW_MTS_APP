@@ -24,7 +24,8 @@
 		}		
 		
 		$( document ).ready(function() {
-			
+		$("#loading_image").show();
+		$("#loading_image").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");	
 	    var report_number = getUrlVars()["report_no"];
 		var client_id = getUrlVars()["clientid"];
 	    var client_name = getUrlVars()["clientname"];
@@ -40,7 +41,7 @@
                 url: test_result_url,              
                   
                 success:function (data) {
-					
+					$("#loading_image").hide();
 					$(data).each(function() {
 						$('#report_no_for').html("Report Number "+report_number);
 						if(this.test_status == '0'){
@@ -83,6 +84,7 @@
 				    	 <label for="" id="report_no_for"></label>
 				    </div>
 				</div>
+				<div id="loading_image" style="display:none"></div>
 				<div id="no_test_result" style="display:none">
 				</div>
 				<table class="ui unstackable table" id="test_result_row" style="display:none">
