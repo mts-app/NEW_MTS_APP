@@ -64,8 +64,14 @@
 						}else{
 							$('#no_records').hide();
 							$('#no_records').html("");
-							$('#report_result').show();						
-							$('#report_row').append("<tr><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"'>"+this.Report_Number+"</a></td><td>"+this.Result+"</td></tr>");
+							$('#report_result').show();
+							var ROW;
+							if(this.Result == 'PASS'){
+								ROW = "<tr class='positive'><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"'>"+this.Report_Number+"</a></td><td>"+this.Result+"</td></tr>"
+							}else{
+								ROW = "<tr><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"'>"+this.Report_Number+"</a></td><td>"+this.Result+"</td></tr>"
+							}
+							$('#report_row').append(ROW);
 						}						 
 					});                    
                 },
