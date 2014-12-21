@@ -34,7 +34,9 @@
 			}
 			
 		 });
-        function getReportNo(){  
+        function getReportNo(){
+			$("#loading_txt").show();
+			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
 			$('#report_result').hide();
 			$('#report_row').html("");
 			var select_date = $('#datepicker').val();
@@ -51,7 +53,8 @@
                   
                 success:function (data) {
 					
-					$(data).each(function() {						
+					$(data).each(function() {
+						$("#loading_txt").hide();
 						if(this.report_status == '0'){
 							$('#report_result').hide();
 							$('#report_row').html("");
@@ -89,6 +92,7 @@
 						 <div class="ui green button" onclick="getReportNo();">Search</div>
 				    </div>
 				</div>
+				<div id="loading_txt" style="display:none"></div>
 				<div id="no_records" style="display:none">
 				</div>				
 				<table class="ui unstackable table" id="report_result" style="display:none">
