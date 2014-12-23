@@ -31,15 +31,15 @@
 			Client_Name = getUrlVars()["ClientName"];
 			//get date from back buttn through report details page and display selected data back
 			var SELECT_DATE = getUrlVars()["select_date"];
-			$('#datepicker').val(SELECT_DATE);
-			var date_select_url = "http://14.140.163.70:151/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
-			
-            $.ajax({ 
+			if(SELECT_DATE){
+				$('#datepicker').val(SELECT_DATE);
+				var date_select_url = "http://14.140.163.70:151/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
+				$("#loading_txt").show();
+				$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
+				$.ajax({ 
                 type: 'GET',
                 url: date_select_url,              
-                  
-                success:function (data) {
-					
+                success:function (data) {					
 					$(data).each(function() {
 						$("#loading_txt").hide();
 						if(this.report_status == '0'){
@@ -61,8 +61,8 @@
 						}						 
 					});                    
                 },
-            });
-			
+              });
+			}
 			if(Client_Name != ""){
 				$('#welcome_txt').html("Welcome <span style=color:blue>"+Client_Name+"!</span>");
 			}
