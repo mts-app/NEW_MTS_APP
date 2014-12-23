@@ -10,6 +10,11 @@
 	<link rel="stylesheet" href="css/semantic.css">
 	<script type="text/javascript">      
          
+		 $( document ).ready(function() {
+			$("#loading_txt").hide();
+			
+		 });
+		 
          function login(){
             var MOBILE;
 			var EMAIL;
@@ -50,11 +55,11 @@
 					$("#loading_txt").hide();
 					$(data).each(function() {						
 												
-						if($.trim(this.User_Verify_Status) == "true"){
-						   alert('You have successfully logged in. Please wait....');
+						if($.trim(this.User_Verify_Status) == "true"){						   
 						   window.location= "selectdate.html?clientid="+this.Client_ID+"&ClientName="+this.Client_Name;						
 						}else if($.trim(this.user_verify_status) == '0'){
-							alert('You are not verified yet. Please verify your credentials first.');
+							alert('Not registered, please signup first.');
+							 window.location="signup.html";
 							return false;
 						}else if($.trim(this.user_not_exists) == '-1'){
 							var user_field;
@@ -94,7 +99,9 @@
 				  <div id="loading_txt" style="display:none"></div>
 				</div>
 			</div>
+			
 		</div>
+		
 	</main>
 	<footer><p class="align-center text-muted">Copyright &copy; 2014 Modern Testing Services (Global) Ltd. <br>All rights reserved</p></footer>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
