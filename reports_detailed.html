@@ -24,17 +24,22 @@
 		}		
 		
 		$( document ).ready(function() {
+		//show ajax loading image
 		$("#loading_image").show();
-		$("#loading_image").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span><br/>");	
+		$("#loading_image").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span><br/>");
+		//get parameters	
 	    var report_number = getUrlVars()["report_no"];
 		var client_id = getUrlVars()["clientid"];
 	    var client_name = getUrlVars()["clientname"];
+		var select_date = getUrlVars()["select_date"];
+		
 	    if(client_name != ""){
 		$('#welcome_text').html("Welcome <span style=color:blue>"+client_name+"!</span>");
 	    } 
-	    var back_url = "selectdate.html?ClientName="+client_name+"&clientid="+client_id;
+		// create url for back button
+	    var back_url = "selectdate.html?ClientName="+client_name+"&clientid="+client_id+"&select_date="+select_date;
 	    $('#back_btn').attr('href',back_url);
-            var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
+        var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
 			
             $.ajax({ 
                 type: 'GET',
@@ -80,7 +85,7 @@
 			<div style="float:right" id="welcome_text"></div>
 			<div class="align-center">
 				<div class="ui warning form">
-				    <div class="field">
+				    <div class="field" style="margin: 0 0 -1em;">
 				    	 <label for="" id="report_no_for"></label>
 				    </div>
 				</div>
