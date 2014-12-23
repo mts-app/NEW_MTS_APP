@@ -8,6 +8,8 @@ header{
 	width: 100%;
 	height: 75px;
 	border-bottom: 5px #74B70E solid;
+	padding: 0;
+	margin: 0;
 }
 
 header > figure{
@@ -80,5 +82,5 @@ header > figure img{
 }
 
 footer{
-	padding: 0 1em;
+	padding: 0
 }

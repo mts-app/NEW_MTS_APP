@@ -11,8 +11,9 @@
 	<script type="text/javascript">      
          
          function login(){
-             var MOBILE;
-			 var EMAIL;
+            var MOBILE;
+			var EMAIL;
+			
             var EMAIL_OR_MOBILE = $('#email_or_mobile').val();			
             var PASSWORD = $('#password').val();
 			var numbers = /^[0-9]+$/;
@@ -40,11 +41,13 @@
 			}
 			
 			var login_url = "http://14.140.163.70:151/WebService.asmx/UserLogin?mobile="+MOBILE+"&mail="+EMAIL+"&PWD="+PASSWORD;
-			
+			$("#loading_txt").show();
+			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
             $.ajax({ 
                 type: 'GET',
                 url: login_url,                  
-                success:function (data) {					
+                success:function (data) {
+					$("#loading_txt").hide();
 					$(data).each(function() {						
 												
 						if($.trim(this.User_Verify_Status) == "true"){
@@ -88,6 +91,7 @@
 					    <input type="password" name="password" id="password">
 					  </div>
 				  <div class="ui submit positive button" onclick="login();">Login</div>
+				  <div id="loading_txt" style="display:none"></div>
 				</div>
 			</div>
 		</div>
