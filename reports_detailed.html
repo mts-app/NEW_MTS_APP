@@ -60,6 +60,14 @@
 							$('#no_test_result').html("");
 							$('#test_result_row').show();
 							var RATING;
+							var NULL_RATING;
+							
+							if(this.Result == null){
+								this.Result = "In process";								
+							}
+							if(this.Rating == null){
+								this.Rating = "In process";								
+							}
 							if(this.Result == 'FAIL'){
 								RATING = this.Result +" ("+this.Rating+")";
 							}else{
