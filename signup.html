@@ -12,11 +12,12 @@
         
         function signup(){
             
-			var user_fullname   = $('#user_fullname').val();
+			var user_title  	= $('#title').val();
+			var user_name   	= $('#user_name').val();
             var user_email   	= $('#user_email').val();
             var user_phone 	 	= $('#user_mobile').val();
            
-            if(user_fullname ==''){
+            if(user_name ==''){
                 alert('You must enter your name!');
                 return false;
             }
@@ -35,13 +36,19 @@
 					return false;
 				}
 			}
+			var user_fullname;
+			if(user_title != "" && user_name != ""){
+				user_fullname = user_title + " " + user_name;
+			}
+			alert(user_fullname);
+			return false;
 			var numbers = /^[0-9]+$/;
 			if(!user_phone.match(numbers))  
 			{
 				alert("Mobile number should be numeric only.");
 				return false;
 			}	
-           var signup_url = "http://14.140.163.70:151/WebService.asmx/UpdateSignup?mail="+user_email+"&mobilenumber="+user_phone;
+           var signup_url = "http://14.140.163.70:151/WebService.asmx/UpdateSignup?mail="+user_email+"&mobilenumber="+user_phone+"&username="+user_fullname;
            
             $.ajax({ 
                 type: 'GEt',
@@ -77,18 +84,18 @@
 				<div class="ui warning form">
 					<div class="field">
 						<label for="">Title</label>
-						<select>
-						  <option value="1">Miss</option>
-						  <option value="0">Ms</option>
-						  <option value="0">Mr</option>
-						  <option value="0">Sir</option>
-						  <option value="0">Mrs</option>
-						  <option value="0">Dr</option>
+						<select id="title">
+						  <option value="Miss">Miss</option>
+						  <option value="Ms">Ms</option>
+						  <option value="Mr">Mr</option>
+						  <option value="Sir">Sir</option>
+						  <option value="Mrs">Mrs</option>
+						  <option value="Dr">Dr</option>
 						</select>
 					</div>
 				  	<div class="field">
 				  		<label for="">Name</label>
-				     	<input type="text" id="user_fullname">
+				     	<input type="text" id="user_name">
 				    </div>
 				    <div class="field">
 				    	<label for="">Email Address</label>
