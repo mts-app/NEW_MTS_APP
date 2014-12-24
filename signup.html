@@ -9,6 +9,11 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">
 	<script type="text/javascript">
+	
+		$( document ).ready(function() {
+			$("#loading_txt").hide();
+			
+		 });
         
         function signup(){
             
@@ -48,12 +53,14 @@
 				return false;
 			}	
            var signup_url = "http://14.140.163.70:151/WebService.asmx/UpdateSignup?mail="+user_email+"&mobilenumber="+user_phone+"&username="+user_fullname;
-           
+            $("#loading_txt").show();
+			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
             $.ajax({ 
                 type: 'GEt',
                 url: signup_url,              
                   
                 success:function (data) {
+					$("#loading_txt").hide();
 					$(data).each(function() {						
 						
 						if($.trim(this.User_Verify_Status) == '1'){
@@ -62,7 +69,7 @@
 						}else if($.trim(this.User_exists) == '0'){
 							alert("Email-address or Mobile number does not match. Please enetr correct information.");
 						}else{ 
-							alert('Something went wrong. Please try after some time. or The email address or mobile number you provided are not verified. Please provide another one.');
+							alert('Something went wrong. Please try after some time. Either email address or mobile number you provided are not verified. Please provide another one.');
 							return false;					  
 						} 
 					});                    
@@ -105,6 +112,7 @@
 				     	<input type="text" id="user_mobile">
 				    </div>					
 					<div class="ui submit positive button" onclick="signup();">Sign up</div>
+					 <div id="loading_txt" style="display:none"></div>
 				</div>
 			</div>
 		</div>
