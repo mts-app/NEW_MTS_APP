@@ -9246,7 +9246,7 @@ ul.ui.list li:before,
   top: auto;
   left: auto;
   margin-left: -1rem;
-  content: 'ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢';
+  content: 'ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢';
   opacity: 1;
   color: rgba(0, 0, 0, 0.8);
   vertical-align: top;
@@ -16294,7 +16294,7 @@ ol.ui.horizontal.list li:before,
 
 .ui.message ul.list li:before {
   position: absolute;
-  content: 'ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢';
+  content: 'ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢';
   left: -1em;
   height: 100%;
   vertical-align: baseline;
@@ -20725,7 +20725,7 @@ a.ui.card:hover,
 }
 
 /*  UTF Reference
-.check:before { content: '\e800'; }  'ÃƒÂ®Ã‚Â Ã¢â€šÂ¬'
+.check:before { content: '\e800'; }  'ÃƒÆ’Ã‚Â®Ãƒâ€šÃ‚Â ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬'
 .circle:before { content: '\e801'; }
 .ok-circled:before { content: '\e806'; }
 .ok-circle:before { content: '\e805'; }
@@ -25002,6 +25002,8 @@ a.ui.nag {
   padding: 0.7em 0.8em;
   text-align: left;
   vertical-align: middle;
+  max-width: 50px;
+  word-wrap: break-word;
 }
 
 /* Icons */
