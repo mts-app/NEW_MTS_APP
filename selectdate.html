@@ -27,6 +27,8 @@
 		var client_id;
 		var Client_Name;
 		$( document ).ready(function() {
+			var isLogin = localStorage.getItem('loggedin);
+			alert(isLogin);
 			client_id = getUrlVars()["clientid"];
 			Client_Name = getUrlVars()["ClientName"];
 			//get date from back buttn through report details page and display selected data back
@@ -113,6 +115,10 @@
                 },
             });        
         }
+		
+		function logout(){
+			localStorage.clear();
+		}
     </script>
 </head>
 <body>
@@ -123,7 +129,7 @@
 	</header>
 	<main>
 		<div class="container">
-			<a href="index.html"><div style="float:right" id="logout_txt" >Logout!</div></a><br/>
+			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();">Logout!</div></a><br/>
 			<div style="float:right" id="welcome_txt"></div>
 			<div class="align-center">
 				<div class="ui warning form">
