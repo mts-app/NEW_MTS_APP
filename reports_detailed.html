@@ -39,7 +39,8 @@
 		var select_date = getUrlVars()["select_date"];
 		
 	    if(client_name != ""){
-		$('#welcome_text').html("Welcome <span style=color:blue>"+client_name+"!</span>");
+			$('#welcome_text').html("Welcome <span style=color:blue>"+client_name+"!</span>");
+			$('#logout_txt').show();
 	    } 
 		// create url for back button
 	    var back_url = "selectdate.html?ClientName="+client_name+"&clientid="+client_id+"&select_date="+select_date;
@@ -100,7 +101,7 @@
 	</header>
 	<main>
 		<div class="container">
-			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();">Logout!</div></a><br/>
+			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();" style="display:none">Logout!</div></a><br/>
 			<div style="float:right" id="welcome_text"></div>
 			<div class="align-center">
 				<div class="ui warning form">
