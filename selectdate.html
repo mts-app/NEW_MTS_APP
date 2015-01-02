@@ -55,7 +55,7 @@
 							if(this.Result == 'PASS'){
 								ROW = "<tr class='positive'><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+SELECT_DATE+"'>"+this.Report_Number+"</a></td><td>"+this.Result+"</td></tr>"
 							}else{
-								ROW = "<tr><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+SELECT_DATE+"'>"+this.Report_Number+"</a></td><td>"+this.Result+"</td></tr>"
+								ROW = "<tr><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+SELECT_DATE+"'>"+this.Report_Number+"</a></td><td style='color:red'>"+this.Result+"</td></tr>"
 							}
 							$('#report_row').append(ROW);
 						}						 
@@ -130,7 +130,8 @@
 				    <div class="field">
 				    	<label for="">Enter date to search reports...</label>
 				    	<div class="ui action input input-append date">
-						  <input type="text" placeholder="mm/dd/yyyy" id="datepicker" value="">						 
+						  <input type="text" id="datepicker" readonly>	
+						  <!--<input type="text" placeholder="mm/dd/yyyy" id="datepicker" value="">-->
 						</div><br/>
 						 <div class="ui green button" onclick="getReportNo();">Search</div>
 				    </div>
@@ -161,7 +162,8 @@
 		     //$('#datepicker').datepicker();
 			 $("#datepicker").datepicker({				
 				autoclose: true,
-				todayHighlight: true			
+				todayHighlight: true,
+				orientation: 'top',				
 			});
 		  });
 	</script>

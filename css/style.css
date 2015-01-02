@@ -32,6 +32,12 @@ header > figure img{
 	border-radius: 4px;
 }
 
+@media all and (min-width: 480px) and (max-width: 800px){
+	.container.select-date{
+		padding: 1em 1em 5em;
+	}
+}
+
 .ui.stackable.grid{
 	margin-left: 0 !important;
 	margin-right: 0 !important;
