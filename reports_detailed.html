@@ -24,6 +24,11 @@
 		}		
 		
 		$( document ).ready(function() {
+			var isLogin = localStorage.getItem('loggedin');			
+			if(!isLogin){
+				window.location="login.html";
+				return false;
+			}
 		//show ajax loading image
 		$("#loading_image").show();
 		$("#loading_image").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span><br/>");
@@ -79,6 +84,10 @@
                 },
             });        
         });
+		
+		function logout(){
+			localStorage.clear();
+		}
     </script>
 </head>
 <body>
@@ -89,7 +98,7 @@
 	</header>
 	<main>
 		<div class="container">
-			<a href="index.html"><div style="float:right" id="logout_txt" >Logout!</div></a><br/>
+			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();">Logout!</div></a><br/>
 			<div style="float:right" id="welcome_text"></div>
 			<div class="align-center">
 				<div class="ui warning form">
