@@ -27,8 +27,11 @@
 		var client_id;
 		var Client_Name;
 		$( document ).ready(function() {
-			var isLogin = localStorage.getItem('loggedin');
-			alert(isLogin);
+			var isLogin = localStorage.getItem('loggedin');			
+			if(!isLogin){
+				window.location="login.html";
+				return false;
+			}
 			client_id = getUrlVars()["clientid"];
 			Client_Name = getUrlVars()["ClientName"];
 			//get date from back buttn through report details page and display selected data back
