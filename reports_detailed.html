@@ -80,7 +80,7 @@
 							}else{
 								RATING = this.Result;
 							}							
-							$('#test_result').append("<tr><td>"+this.Test_Name+"</td><td>"+RATING+"</td></tr>");
+							$('#test_result').append("<tr><td>"+this.Test_Name+"</td><td>"+RATING+"</td><td>"+this.due_date+"</td></tr>");
 							$('#back_btn').show();
 							$('#back_btn').attr('href',back_url);
 						}						 
@@ -118,7 +118,7 @@
 				    <tr>
 				      <th>Test name</th>
 				      <th>Result</th>
-					  <th>Due Date</th>
+					  <th>Expected Due Date</th>
 				    </tr>
 				  </thead>
 				  <tbody id="test_result">				   			    
