@@ -70,6 +70,8 @@
 			}
 			if(Client_Name != ""){
 				$('#welcome_txt').html("Welcome <span style=color:blue>"+Client_Name+"!</span>");
+				$('#logout_txt').show();
+				
 			}
 			
 		 });
@@ -132,7 +134,7 @@
 	</header>
 	<main>
 		<div class="container">
-			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();">Logout!</div></a><br/>
+			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();" style="display:none">Logout!</div></a><br/>
 			<div style="float:right" id="welcome_txt"></div>
 			<div class="align-center">
 				<div class="ui warning form">
