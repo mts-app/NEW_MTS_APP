@@ -28,18 +28,19 @@
 		var Client_Name;
 		$( document ).ready(function() {
 			var isLogin = localStorage.getItem('loggedin');			
-			if(!isLogin){
+			  if(!isLogin){
 				$('#logout_txt').hide();
 				window.location="index.html";
 				return false;
 			}
 			client_id = getUrlVars()["clientid"];
 			Client_Name = getUrlVars()["ClientName"];
+			
 			//get date from back buttn through report details page and display selected data back
 			var SELECT_DATE = getUrlVars()["select_date"];
+			
 			if(SELECT_DATE){
-				$('#datepicker').val(SELECT_DATE);
-				//var date_select_url = "http://14.140.163.70:151/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
+				$('#datepicker').val(SELECT_DATE);				
 				var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
 				$("#loading_txt").show();
 				$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
@@ -59,10 +60,11 @@
 							$('#no_records').html("");
 							$('#report_result').show();
 							var ROW;
+							
 							if(this.Result == 'PASS'){
-								ROW = "<tr class='positive'><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+SELECT_DATE+"'>"+this.Report_Number+"</a></td><td>"+this.Result+"</td></tr>"
+								ROW = "<tr class='positive'><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+SELECT_DATE+"'>"+this.Report_Number+"</a></td><td>"+this.duedate+"</td><td>"+this.Result+"</td></tr>"
 							}else{
-								ROW = "<tr><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+SELECT_DATE+"'>"+this.Report_Number+"</a></td><td style='color:red'>"+this.Result+"</td></tr>"
+								ROW = "<tr><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+SELECT_DATE+"'>"+this.Report_Number+"</a></td><td>"+this.duedate+"</td><td style='color:red'>"+this.Result+"</td></tr>"
 							}
 							$('#report_row').append(ROW);
 						}						 
@@ -90,9 +92,8 @@
 				return false;
 			}
 			$("#loading_txt").show();
-			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
-           //var date_select_url = "http://14.140.163.70:151/WebService.asmx/ReportResult?date="+select_date+"&clientid="+client_id;
-		   var date_select_url = "http://online.mts-global.com/WebService.asmx/ReportResult?date="+select_date+"&clientid="+client_id;
+			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");          
+		   var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+select_date+"&clientid="+client_id;
 			
             $.ajax({ 
                 type: 'GET',
@@ -113,9 +114,9 @@
 							$('#report_result').show();
 							var ROW;
 							if(this.Result == 'PASS'){
-								ROW = "<tr class='positive'><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+select_date+"'>"+this.Report_Number+"</a></td><td>"+this.Result+"</td></tr>"
+								ROW = "<tr class='positive'><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+select_date+"'>"+this.Report_Number+"</a></td><td>"+this.duedate+"</td><td>"+this.Result+"</td></tr>"
 							}else{
-								ROW = "<tr><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+select_date+"'>"+this.Report_Number+"</a></td><td style='color:red'>"+this.Result+"</td></tr>"
+								ROW = "<tr><td><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&select_date="+select_date+"'>"+this.Report_Number+"</a></td><td>"+this.duedate+"</td><td style='color:red'>"+this.Result+"</td></tr>"
 							}
 							$('#report_row').append(ROW);
 						}						 
@@ -157,7 +158,8 @@
 				  <thead>
 				    <tr>
 				      <th><div id="report_no">Report No.</div></th>
-				      <th>Status</th>
+					  <th>Expected Due Date</th>
+				      <th>Status</th>					  
 				    </tr>
 				  </thead>
 				  <tbody id="report_row">			   	   
@@ -173,7 +175,7 @@
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script>
 		$(function() {
-		     //$('#datepicker').datepicker();
+		     
 			 $("#datepicker").datepicker({				
 				autoclose: true,
 				todayHighlight: true,
