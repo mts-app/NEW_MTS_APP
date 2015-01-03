@@ -39,7 +39,8 @@
 			var SELECT_DATE = getUrlVars()["select_date"];
 			if(SELECT_DATE){
 				$('#datepicker').val(SELECT_DATE);
-				var date_select_url = "http://14.140.163.70:151/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
+				//var date_select_url = "http://14.140.163.70:151/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
+				var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
 				$("#loading_txt").show();
 				$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
 				$.ajax({ 
@@ -90,7 +91,8 @@
 			}
 			$("#loading_txt").show();
 			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
-           var date_select_url = "http://14.140.163.70:151/WebService.asmx/ReportResult?date="+select_date+"&clientid="+client_id;
+           //var date_select_url = "http://14.140.163.70:151/WebService.asmx/ReportResult?date="+select_date+"&clientid="+client_id;
+		   var date_select_url = "http://online.mts-global.com/WebService.asmx/ReportResult?date="+select_date+"&clientid="+client_id;
 			
             $.ajax({ 
                 type: 'GET',

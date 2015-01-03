@@ -46,7 +46,8 @@
 		// create url for back button
 	    var back_url = "selectdate.html?ClientName="+client_name+"&clientid="+client_id+"&select_date="+select_date;
 	    
-        var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
+        //var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
+		var test_result_url = "http://online.mts-global.com/lims-app/WebService.asmx/TestResult?reportnumber="+report_number;
 			
             $.ajax({ 
                 type: 'GET',
