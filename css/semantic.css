@@ -65,6 +65,7 @@ html {
 
 body {
   margin: 0;
+  padding: 0;
 }
 
 /* HTML5 display definitions
@@ -515,7 +516,6 @@ html {
 body {
   margin: 0px;
   padding: 0px;
-  min-width: 278px;
   background: #f7f7f7;
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -7568,13 +7568,6 @@ img.ui.bordered.image {
 }
 
 /* Button on Right */
-
-.ui.action.input:not([class*="left action"]) > input {
-  border-right: none;
-  border-top-right-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
-}
-
 .ui.action.input:not([class*="left action"]) > .button,
 .ui.action.input:not([class*="left action"]) > .buttons {
   border-top-left-radius: 0px;
@@ -16796,7 +16789,7 @@ ol.ui.horizontal.list li:before,
 /* Table Cells */
 
 .ui.table td {
-  padding: 0.7em 0.8em;
+  padding: 0;
   text-align: left;
   vertical-align: middle;
 }
@@ -24999,10 +24992,10 @@ a.ui.nag {
 /* Table Cells */
 
 .ui.table td {
-  padding: 0.7em 0.8em;
+  padding: 10px;
   text-align: left;
   vertical-align: middle;
-  max-width: 50px;
+  max-width: 40px;
   word-wrap: break-word;
 }
 
@@ -25033,51 +25026,6 @@ a.ui.nag {
 /* Responsive */
 
 @media only screen and (max-width: 768px) {
-  .ui.table {
-    /* display: block; */
-    /* padding: 0em; */
-  }
-
-  .ui.table thead {
-    /* display: block; */
-  }
-
-  .ui.table tfoot {
-    display: block;
-  }
-
-  .ui.table tbody {
-    /* display: block; */
-  }
-
-  .ui.table tr {
-    /* display: block; */
-  
-    width: 100%;
-}
-
-  .ui.table tr > th,
-  .ui.table tr > td {
-    /* background: none; */
-    /* width: 100% !important; */
-    /* display: block; */
-    /* border: none !important; */
-    /* padding: 0.25em 0.75em; */
-    /* box-shadow: none; */
-  }
-
-  .ui.table th:first-child,
-  .ui.table td:first-child {
-    /* font-weight: bold; */
-    /* padding-top: 1em; */
-  }
-
-  .ui.table th:last-child,
-  .ui.table td:last-child {
-    /* box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.1) inset; */
-    /* padding-bottom: 1em; */
-  }
-
   /* Clear BG Colors */
 
   .ui.table tr > td.warning,
