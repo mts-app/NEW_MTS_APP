@@ -16,6 +16,10 @@ header > figure{
 	margin: 0
 }
 
+footer{
+	font-size: 13px;
+}
+
 header > figure img{
 	min-width: 200px;
 	max-width: 100%;
