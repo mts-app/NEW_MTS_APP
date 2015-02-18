@@ -160,8 +160,7 @@
 					get_Vendor_Manufacture(vendor_or_manufacture_id,vendor_or_manufacture_type);	
 				}
 			}			
-			
-			//client_id=875;
+						
 			//get date from back buttn through report details page and display selected data back		
 			if((from_date && to_date && radio_client_vendor) || search_report_no){								
 				//var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
@@ -240,7 +239,7 @@
 		}
 		 
 		 //display report details
-        function getReportNo(){					
+       /* function getReportNo(){					
 			$(".table-container").hide();			
 			$('#report_result').hide();			
 			$('#no_records').hide();
@@ -300,9 +299,8 @@
 				}else if(radio_client_vendor == "Client"){
 					radio_client_vendor = "c";
 				}
-			}
+			}			
 			
-			//client_id =875;
 			var SELECT_URL;
 			$("#loading_txt").show();
 			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 				
@@ -365,7 +363,7 @@
 		//populate Manufacture and Vendor drop down
         function get_Vendor_Manufacture(Id,client_type){								
 			
-			//client_id =875;
+			
 			if(client_type != "" && client_type == 'v'){
 				radio_client_vendor = "Vendor";
 			}else if(client_type != "" && client_type == 'f'){
@@ -404,7 +402,7 @@
         }		
 		function logout(){
 			localStorage.clear();
-		}		
+		}		*/
     </script>
 </head>
 <body>
