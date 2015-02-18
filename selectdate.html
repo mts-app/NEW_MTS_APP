@@ -46,8 +46,8 @@
 		var radio_search_value = "report_search"; //for storing value for selected search type i.e. date or report no
 		var radio_client_vendor = "Client"; //stores value for selected client type i.e. client, vendor etc.
 		var vendor_or_manufacture_type;
-		$( document ).ready(function() {			
-			var isLogin = localStorage.getItem('loggedin');			
+		$( document ).ready(function() { alert('load');			
+			/*var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
 				window.location="index.html";
@@ -224,7 +224,7 @@
 			if(Client_Name != ""){
 				$('#welcome_txt').html("Welcome <span style=color:blue>"+Client_Name+"!</span>");
 				$('#logout_txt').show();				
-			}			
+			}*/			
 		 });
 		
 		function default_check_report(){
@@ -239,7 +239,7 @@
 		}
 		 
 		 //display report details
-       /* function getReportNo(){					
+       function getReportNo(){					
 			$(".table-container").hide();			
 			$('#report_result').hide();			
 			$('#no_records').hide();
@@ -402,7 +402,7 @@
         }		
 		function logout(){
 			localStorage.clear();
-		}		*/
+		}
     </script>
 </head>
 <body>
