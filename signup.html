@@ -21,6 +21,7 @@
 			var user_name   	= $('#user_name').val();
             var user_email   	= $('#user_email').val();
             var user_phone 	 	= $('#user_mobile').val();
+			var user_password 	= $('#user_password').val();
            
             if(user_name ==''){
                 alert('You must enter your name!');
@@ -53,7 +54,7 @@
 				return false;
 			}	
            
-		   var signup_url = "http://online.mts-global.com/lims-app/WebService.asmx/UpdateSignup?mail="+user_email+"&mobilenumber="+user_phone+"&username="+user_fullname;
+		   var signup_url = "http://online.mts-global.com/lims-app/WebService.asmx/UpdateSignup?mail="+user_email+"&mobilenumber="+user_phone+"&username="+user_fullname+"&userpassword="+user_password;
             $("#loading_txt").show();
 			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
             $.ajax({ 
@@ -67,6 +68,9 @@
 						if($.trim(this.User_Verify_Status) == '1'){
 						   alert('You have been verified successfully.');
 						   window.location= "login.html";						
+						}else if($.trim(this.user_already_verified) == '1'){
+							alert("Already registered, ready for login.");
+							window.location= "login.html";
 						}else if($.trim(this.User_exists) == '0'){
 							alert("Email-address or Mobile number does not match. Please enter correct information.");
 						}else{ 
@@ -111,7 +115,11 @@
 				    <div class="field">
 				    	<label for="">Mobile Number</label>
 				     	<input type="text" id="user_mobile">
-				    </div>					
+				    </div>
+					 <div class="field">
+				    	<label for="">Password</label>
+				     	<input type="text" id="user_password">
+				    </div>	
 					<div class="ui submit positive button" onclick="signup();">Sign up</div>
 					 <div id="loading_txt" style="display:none"></div>
 				</div>
