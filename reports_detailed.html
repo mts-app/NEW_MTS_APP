@@ -33,20 +33,26 @@
 		//show ajax loading image
 		$("#loading_image").show();
 		$("#loading_image").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span><br/>");
+		
 		//get parameters	
 	    var report_number = getUrlVars()["report_no"];
 		var client_id = getUrlVars()["clientid"];
 	    var client_name = getUrlVars()["clientname"];
-		var select_date = getUrlVars()["select_date"];
+		var from_date = getUrlVars()["from_date"];
+		var to_date = getUrlVars()["to_date"];
+		var vendor_or_manufacture_type = getUrlVars()["vendor_or_manufacture_type"];
+		var vendor_or_manufacture_id = getUrlVars()["vendor_or_manufacture_id"];
+		var radio_search_value = getUrlVars()["radio_search_value"];
 		
 	    if(client_name != ""){
 			$('#welcome_text').html("Welcome <span style=color:blue>"+client_name+"!</span>");
 			$('#logout_txt').show();
 	    } 
 		// create url for back button
-	    var back_url = "selectdate.html?ClientName="+client_name+"&clientid="+client_id+"&select_date="+select_date;   
+	    var back_url = "selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value;   
        
-		var test_result_url = "http://online.mts-global.com/lims-app/WebService.asmx/TestResult?reportnumber="+report_number;
+		//var test_result_url = "http://online.mts-global.com/lims-app/WebService.asmx/TestResult?reportnumber="+report_number;
+		var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
 			
             $.ajax({ 
                 type: 'GET',
@@ -80,10 +86,10 @@
 							}else{
 								RATING = this.Result;
 							}							
-							$('#test_result').append("<tr><td>"+this.Test_Name+"</td><td>"+RATING+"</td></tr>");
+							$('#test_result').append("<tr><td>"+this.Test_Name+"</td><td>"+RATING+"</td></tr>");							
+						}
 							$('#back_btn').show();
-							$('#back_btn').attr('href',back_url);
-						}						 
+							$('#back_btn').attr('href',back_url);	
 					});                    
                 },
             });        
@@ -127,7 +133,7 @@
 			</div>
 		</div>
 	</main>
-	<footer><p class="align-center text-muted">Copyright &copy; 2014 Modern Testing Services (Global) Ltd. <br>All rights reserved</p></footer>	
+	<footer><p class="align-center text-muted">Copyright &copy; 2015 Modern Testing Services (Global) Ltd. <br>All rights reserved</p></footer>	
 	<script src="js/semantic.js"></script>
 </body>
 </html>
