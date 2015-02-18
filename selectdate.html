@@ -9,10 +9,10 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
-	<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>-->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>	
+	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<style>		
 	#datepicker_from, #datepicker_to {
 	    background: white url(img/CalendarIconsSmallRed.png) right no-repeat;
@@ -25,7 +25,7 @@
 	}	
 	</style>
 	<script type="text/javascript">
-		/*function getUrlVars()
+		function getUrlVars()
 		{
 			var vars = [], hash;
 			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -46,9 +46,9 @@
 		var vendor_or_manufacture_id;
 		var radio_search_value = "report_search"; //for storing value for selected search type i.e. date or report no
 		var radio_client_vendor = "Client"; //stores value for selected client type i.e. client, vendor etc.
-		var vendor_or_manufacture_type;*/
-		$( document ).ready(function() { alert('load');			
-			/*var isLogin = localStorage.getItem('loggedin');			
+		var vendor_or_manufacture_type;
+		$( document ).ready(function() {			
+			var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
 				window.location="index.html";
@@ -225,10 +225,10 @@
 			if(Client_Name != ""){
 				$('#welcome_txt').html("Welcome <span style=color:blue>"+Client_Name+"!</span>");
 				$('#logout_txt').show();				
-			}*/			
+			}			
 		 });
 		
-		/*function default_check_report(){
+		function default_check_report(){
 			radio_client_vendor = "";
 			$('#search_report').val("");
 			$('#report_result').hide(); //hide data table if user has already saw some data through date search
@@ -240,7 +240,7 @@
 		}
 		 
 		 //display report details
-       function getReportNo(){					
+        function getReportNo(){					
 			$(".table-container").hide();			
 			$('#report_result').hide();			
 			$('#no_records').hide();
@@ -403,7 +403,7 @@
         }		
 		function logout(){
 			localStorage.clear();
-		}*/
+		}		
     </script>
 </head>
 <body>
