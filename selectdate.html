@@ -9,9 +9,6 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<style>		
 	#datepicker_from, #datepicker_to {
@@ -200,9 +197,13 @@
 							if(this.Result == null){
 								this.Result = "In process";								
 							}
-							if(this.issuedate == null){
+							if(this.issuedate == null || this.duedate == null){
 								this.issuedate = "N/A";
-							}							
+								this.duedate = "N/A";
+							}
+							if(this.Result == 'FAIL'){
+								this.Result = "<font color=red>"+this.Result+"</font>";
+							}
 							var ROW;
 							if(this.Status == 'OPEN'){
 								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
@@ -333,8 +334,12 @@
 							if(this.Result == null){
 								this.Result = "In process";								
 							}
-							if(this.issuedate == null){
+							if(this.issuedate == null || this.duedate == null){
 								this.issuedate = "N/A";
+								this.duedate = "N/A";
+							}
+							if(this.Result == 'FAIL'){
+								this.Result = "<font color=red>"+this.Result+"</font>";
 							}							
 							var ROW;
 							if(this.Status == 'OPEN'){
@@ -362,8 +367,7 @@
 			$( "#dialog" ).dialog({ dialogClass: 'fixed-dialog' });					
 		}		
 		//populate Manufacture and Vendor drop down
-        function get_Vendor_Manufacture(Id,client_type){								
-			
+        function get_Vendor_Manufacture(Id,client_type){
 			
 			if(client_type != "" && client_type == 'v'){
 				radio_client_vendor = "Vendor";
@@ -382,12 +386,12 @@
 					$(data).each(function() {
 						var select_index;
 						if(this.no_vendor_manufacture != '1'){
-							if(this.Associationed_Id == Id){
+							if($.trim(this.Associationed_Id) == $.trim(Id)){
 								select_index =	"selected=selected";
 							}else{
 								select_index = " ";
 							}
-							var options = "<option value='"+this.Associationed_Id+"' "+select_index+">"+this.Associationed_Name+"</option>";
+							var options = "<option value='"+$.trim(this.Associationed_Id)+"' "+select_index+">"+this.Associationed_Name+"</option>";
 							$(options).appendTo('#ddl_Vendor_Manufacture');
 						}else{
 							alert("No Data Found!");
@@ -430,8 +434,8 @@
 							</div><br/>
 							<div style="text-align: left;line-height:1.60;">
 							  <input type="radio" name="check_sub" value="Client" checked="checked"/>&nbsp;Client
-							  <br/><input type="radio" name="check_sub" value="Vendor"/>&nbsp;Vendor
-							  <br/><input type="radio" name="check_sub" value="Manufacture"/>&nbsp;Manufacturer	
+							  &nbsp;&nbsp;<input type="radio" name="check_sub" value="Vendor"/>&nbsp;Vendor
+							  &nbsp;&nbsp;<input type="radio" name="check_sub" value="Manufacture"/>&nbsp;Manufacturer	
 							  <br/>
 							</div>
 							<br/>
