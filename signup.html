@@ -8,20 +8,21 @@
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	
 		$( document ).ready(function() {
 			$("#loading_txt").hide();
 			
-		 });
-        
+		 });        
         function signup(){
             
-			var user_title  	= $('#title').val();
-			var user_name   	= $('#user_name').val();
-            var user_email   	= $('#user_email').val();
-            var user_phone 	 	= $('#user_mobile').val();
-			var user_password 	= $('#user_password').val();
+			var user_title  	 = $('#title').val();
+			var user_name   	 = $('#user_name').val();
+            var user_email   	 = $('#user_email').val();
+            var user_phone 	 	 = $('#user_mobile').val();
+			var user_password 	 = $('#user_password').val();
+			var confirm_password = $('#confirm_password').val();
            
             if(user_name ==''){
                 alert('You must enter your name!');
@@ -42,6 +43,11 @@
 					return false;
 				}
 			}
+			
+			if(user_password != confirm_password){
+                alert('Confirm Password, MISMATCH!');
+                return false;                
+            } 
 			var user_fullname;
 			if(user_title != "" && user_name != ""){
 				user_fullname = user_title + " " + user_name;
@@ -82,6 +88,11 @@
                 },
             });        
         }
+		function ValidateInput(obj){
+			if(obj.value!="") {
+				obj.value =obj.value.toUpperCase();
+			}
+		}
     </script>
 </head>
 <body>
@@ -107,7 +118,7 @@
 					</div>
 				  	<div class="field">
 				  		<label for="">Name</label>
-				     	<input type="text" id="user_name">
+				     	<input type="text" id="user_name" onkeyup="ValidateInput(this);">
 				    </div>
 				    <div class="field">
 				    	<label for="">Email Address</label>
@@ -117,9 +128,13 @@
 				    	<label for="">Mobile Number</label>
 				     	<input type="text" id="user_mobile">
 				    </div>
-					 <div class="field">
+					<div class="field">
 				    	<label for="">Password</label>
 				     	<input type="password" id="user_password">
+				    </div>
+					<div class="field">
+				    	<label for="">Confirm Password</label>
+				     	<input type="password" id="confirm_password">
 				    </div>	
 					<div class="ui submit positive button" onclick="signup();">Sign up</div>
 					 <div id="loading_txt" style="display:none"></div>
@@ -127,8 +142,7 @@
 			</div>
 		</div>
 	</main>
-	<footer><p class="align-center text-muted">Copyright &copy; 2014 Modern Testing Services (Global) Ltd. <br>All rights reserved</p></footer>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<footer><p class="align-center text-muted">Copyright &copy; 2015 Modern Testing Services (Global) Ltd. <br>All rights reserved</p></footer>
 	<script src="js/semantic.js"></script>
 </body>
 </html>
