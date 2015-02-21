@@ -225,7 +225,7 @@
               });
 			}
 			if(Client_Name != ""){
-				var clientname = Client_Name.toString()
+				var clientname = decodeURI(Client_Name);
 				$('#welcome_txt').html("Welcome <span style=color:blue>"+clientname+"!</span>");
 				$('#logout_txt').show();				
 			}			
