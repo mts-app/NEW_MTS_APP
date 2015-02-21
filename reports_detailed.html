@@ -45,7 +45,8 @@
 		var radio_search_value = getUrlVars()["radio_search_value"];
 		
 	    if(client_name != ""){
-			$('#welcome_text').html("Welcome <span style=color:blue>"+client_name+"!</span>");
+			var clientname = decodeURI(client_name);
+			$('#welcome_text').html("Welcome <span style=color:blue>"+clientname+"!</span>");
 			$('#logout_txt').show();
 	    } 
 		// create url for back button
