@@ -370,7 +370,7 @@
 		function show_popup(id){
 			var REASON =  $("#hold_reason_"+id).html();
 			var DESC =  $("#hold_desc_"+id).html();
-			swal("Reason:\n"+REASON, "\nDescription:\n"+DESC)			
+			window.alert("Reason:\n"+REASON +"\n\nDescription:\n"+DESC);		
 		}		
 		//populate Manufacture and Vendor drop down
         function get_Vendor_Manufacture(Id,client_type){
