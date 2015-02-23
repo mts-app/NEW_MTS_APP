@@ -8,8 +8,10 @@
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">
+	<link rel="stylesheet" type="text/css" href="css/sweet-alert.css">
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="js/sweet-alert.min.js"></script>
 	<style>		
 	#datepicker_from, #datepicker_to {
 	    background: white url(img/CalendarIconsSmallRed.png) right no-repeat;
@@ -212,7 +214,7 @@
 								var numberreport = this.Report_Number;
 								var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
 								this.Status = "<a onclick=show_popup("+report+")>"+this.Status+"</a>";
-								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + report + " class=dialog style=display:none>Reason:<p id=hold_desc_"+report+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+report+">"+this.Hold_Desc+"</p></div></td></tr>";
+								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + report + " class=dialog style=display:none>Reason:<p id=hold_reason_"+report+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+report+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
 								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
@@ -351,7 +353,7 @@
 								var numberreport = this.Report_Number;
 								var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
 								this.Status = "<a onclick=show_popup("+report+")>"+this.Status+"</a>";
-								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + report + " class=dialog style=display:none>Reason:<p id=hold_desc_"+report+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+report+">"+this.Hold_Desc+"</p></div></td></tr>";
+								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + report + " class=dialog style=display:none>Reason:<p id=hold_reason_"+report+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+report+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
 								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
@@ -365,8 +367,10 @@
         }
 		
 		//show pop up dialog for hold on status
-		function show_popup(id){				
-			$("#dialog_"+id).show();				
+		function show_popup(id){
+			var REASON =  $("#hold_reason_"+id).html();
+			var DESC =  $("#hold_desc_"+id).html();
+			swal("Reason:\n"+REASON, "\nDescription:\n"+DESC)			
 		}		
 		//populate Manufacture and Vendor drop down
         function get_Vendor_Manufacture(Id,client_type){
