@@ -10,18 +10,27 @@
 	<link rel="stylesheet" href="css/semantic.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script type="text/javascript">      
-         
+         var client_checkbox;
 		 $( document ).ready(function() {
-			$("#loading_txt").hide();
-			
+				$("#loading_txt").hide(); 
+				
+				$('#vendor_check').click(function() {
+					$('#factory_check').prop('checked', false);;
+					client_checkbox = 'vendor';
+				});
+				$('#factory_check').click(function(){					
+					$('#vendor_check').prop('checked', false);
+					client_checkbox = 'factory';
+				});	
+					
 		 });
 		 
          function login(){
             var MOBILE;
-			var EMAIL;
+			var EMAIL;			
+            var EMAIL_OR_MOBILE = $.trim($('#email_or_mobile').val());			
+            var PASSWORD = $.trim($('#password').val());
 			
-            var EMAIL_OR_MOBILE = $('#email_or_mobile').val();			
-            var PASSWORD = $('#password').val();
 			var numbers = /^[0-9]+$/;
             if(EMAIL_OR_MOBILE ==''){
                 alert('You must enter Email-address or Mobile number!');
@@ -45,7 +54,7 @@
 					}
 				}
 			}
-						
+			var selectdate_url;			
 			//var login_url = "http://online.mts-global.com/lims-app/WebService.asmx/UserLogin?mobile="+MOBILE+"&mail="+EMAIL+"&PWD="+PASSWORD;
 			var login_url = "http://14.140.163.70:151/WebService.asmx/UserLogin?mobile="+MOBILE+"&mail="+EMAIL+"&PWD="+PASSWORD;
 			$("#loading_txt").show();
@@ -59,7 +68,14 @@
 												
 						if($.trim(this.User_Verify_Status) == "true"){
 							localStorage.setItem('loggedin', 1);
-						   window.location= "selectdate.html?clientid="+this.Client_ID+"&ClientName="+this.Client_Name;						
+						    if(client_checkbox == 'vendor'){
+								selectdate_url = "vendor_login_selectdate.html?clientid="+this.Client_ID+"&ClientName="+this.Client_Name+"&checkbox_value="+client_checkbox;
+							}else if(client_checkbox == 'factory'){
+								selectdate_url = "factory_login_selectdate.html?clientid="+this.Client_ID+"&ClientName="+this.Client_Name+"&checkbox_value="+client_checkbox;
+							}else{
+								selectdate_url = "selectdate.html?clientid="+this.Client_ID+"&ClientName="+this.Client_Name;
+							}
+						   window.location= selectdate_url;						
 						}else if($.trim(this.user_verify_status) == '0'){
 							alert('Not registered, please signup first.');
 							 window.location="signup.html";
@@ -97,7 +113,11 @@
 				    <div class="field">
 					  	<label for="">Password</label>
 					    <input type="password" name="password" id="password">
-					  </div>
+					</div>
+					<div style="text-align: left;line-height:1;">					  	
+					    <input type="checkbox" class="login_or_vendor" name="vendor_check" id="vendor_check">&nbsp;&nbsp;Vendor
+						&nbsp;&nbsp;<input type="checkbox" class="login_or_vendor" name="factory_check" id="factory_check">&nbsp;&nbsp;Factory
+					</div><br/>
 				  <div class="ui submit positive button" onclick="login();">Login</div>
 				  <div id="loading_txt" style="display:none"></div>
 				</div>

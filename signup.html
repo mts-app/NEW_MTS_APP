@@ -17,12 +17,12 @@
 		 });        
         function signup(){
             
-			var user_title  	 = $('#title').val();
-			var user_name   	 = $('#user_name').val();
-            var user_email   	 = $('#user_email').val();
-            var user_phone 	 	 = $('#user_mobile').val();
-			var user_password 	 = $('#user_password').val();
-			var confirm_password = $('#confirm_password').val();
+			var user_title  	 = $.trim($('#title').val());
+			var user_name   	 = $.trim($('#user_name').val());
+            var user_email   	 = $.trim($('#user_email').val());
+            var user_phone 	 	 = $.trim($('#user_mobile').val());
+			var user_password 	 = $.trim($('#user_password').val());
+			var confirm_password = $.trim($('#confirm_password').val());
            
             if(user_name ==''){
                 alert('You must enter your name!');
