@@ -34,7 +34,8 @@
 		$("#loading_image").show();
 		$("#loading_image").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span><br/>");
 		
-		//get parameters	
+		//get parameters
+		var checkbox_value = getUrlVars()["checkbox_value"];		
 	    var report_number = getUrlVars()["report_no"];
 		var client_id = getUrlVars()["clientid"];
 	    var client_name = getUrlVars()["clientname"];
@@ -50,7 +51,15 @@
 			$('#logout_txt').show();
 	    } 
 		// create url for back button
-	    var back_url = "selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value;   
+		var back_url;
+		if(checkbox_value == "vendor"){
+			back_url = "vendor_login_selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value;   
+		}else if(checkbox_value == "factory"){
+			back_url = "factory_login_selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value;   
+		}else{
+			back_url = "selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value;   
+		}
+	    //var back_url = "selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value;   
        
 		//var test_result_url = "http://online.mts-global.com/lims-app/WebService.asmx/TestResult?reportnumber="+report_number;
 		var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
