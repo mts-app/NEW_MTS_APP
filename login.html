@@ -57,6 +57,7 @@
 			var selectdate_url;			
 			//var login_url = "http://online.mts-global.com/lims-app/WebService.asmx/UserLogin?mobile="+MOBILE+"&mail="+EMAIL+"&PWD="+PASSWORD;
 			var login_url = "http://14.140.163.70:151/WebService.asmx/UserLogin?mobile="+MOBILE+"&mail="+EMAIL+"&PWD="+PASSWORD;
+			
 			$("#loading_txt").show();
 			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
             $.ajax({ 
@@ -67,7 +68,7 @@
 					$(data).each(function() {						
 												
 						if($.trim(this.User_Verify_Status) == "true"){
-							localStorage.setItem('loggedin', 1);
+						    localStorage.setItem('loggedin', 1);
 						    if(client_checkbox == 'vendor'){
 								selectdate_url = "vendor_login_selectdate.html?clientid="+this.Client_ID+"&ClientName="+this.Client_Name+"&checkbox_value="+client_checkbox;
 							}else if(client_checkbox == 'factory'){

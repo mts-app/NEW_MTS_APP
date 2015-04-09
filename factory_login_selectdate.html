@@ -40,6 +40,7 @@
 		var search_report_no;
 		var from_date;
 		var to_date;
+		var checkbox_value;
 		var vendor_or_manufacture_id;
 		var radio_search_value = "report_search"; //for storing value for selected search type i.e. date or report no
 		var radio_client_vendor = "Client"; //stores value for selected client type i.e. client, vendor etc.
@@ -59,11 +60,13 @@
 				//empty date fields by default
 				$('#datepicker_from').val(""); 
 				$('#datepicker_to').val("");
+				//uncheck checkbox by default
+				$("input[name='check_sub']:checked").prop('checked', false);
 				radio_search_value = $(this).val();
 				if(radio_search_value == 'date_search'){
 					$('#report_result').hide();
 					$('#no_records').hide();
-					$('input:radio[value=client]').prop('checked', true);					
+					//$('input:radio[value=client]').prop('checked', true);					
 					$('#lbl_search_by_date').show();
 					$('#search_by_date').show();				
 					$('#lbl_search_by_report').hide();
@@ -72,32 +75,35 @@
 					$('#report_result').hide();
 					default_check_report();
 				}				
-				if(radio_client_vendor == "" || radio_client_vendor == "Client"){
+				if(radio_client_vendor == "" ){
 					$('#ddl_div').hide();
 				}else{
 					$('#ddl_div').show();
 				}				
 			});
-			
+			var IsChecked;
 			//show dropdown according to clients,vendors etc. radio button.
-			$("input[name='check_sub']").click(function () {				
+			$("input[name='check_sub']").click(function () {
+				//hide dropdown by default
+				$('#ddl_Vendor_Manufacture').hide();				
+				//check if checkbox is clicked
+				IsChecked = $("input[name='check_sub']:checked").length > 0;
+				//empty dropdown if filled already
 				$('#ddl_Vendor_Manufacture').empty();
 				$('#report_result').hide();
-				radio_client_vendor = $(this).val();								
-				if(radio_client_vendor == 'Client'){ 
-					$('#ddl_div').hide();						
-				}else if(radio_client_vendor == 'Vendor'){
-					$('#ddl_div').show();
+								
+				if(IsChecked == true){
+					radio_client_vendor = $(this).val();
 					$('#ddl_Vendor_Manufacture').show();
-					get_Vendor_Manufacture("","");									
-				}else if(radio_client_vendor == 'Manufacture'){
 					$('#ddl_div').show();
-					$('#ddl_Vendor_Manufacture').show();
-					get_Vendor_Manufacture("","");									
-				}				
+					get_Vendor_Manufacture("","");	
+				}else{
+					$('#ddl_Vendor_Manufacture').hide();
+					$('#ddl_div').hide();
+					radio_client_vendor="";
+				}					
 			});
-			
-			
+						
 			// get values if user back from report details page
 			if(getUrlVars()["clientid"]){
 				client_id = getUrlVars()["clientid"];				
@@ -107,7 +113,10 @@
 			}
 			if(getUrlVars()["radio_search_value"]){
 				radio_search_value = getUrlVars()["radio_search_value"];				
-			}			
+			}
+			if(getUrlVars()["checkbox_value"]){
+				checkbox_value = getUrlVars()["checkbox_value"];				
+			}	
 			if(getUrlVars()["report_number"]){ 
 				search_report_no = getUrlVars()["report_number"];					
 			}
@@ -128,7 +137,7 @@
 			
 			//check report number by default
 			var radios = $('input:radio[name=search]');
-			var vendor_manufector_radios = $('input:radio[name=check_sub]');
+			var vendor_manufector_radios = $('input:checkbox[name=check_sub]');
 			if(!getUrlVars()["radio_search_value"]){
 				if(radios.is(':checked') === false) {
 					radios.filter('[value=report_search]').prop('checked', true);
@@ -150,35 +159,25 @@
 					default_check_report();
 					$('#search_report').val(search_report_no);
 				}
-				if(vendor_or_manufacture_type == 'v' && vendor_or_manufacture_id != "") { // check vendor or manufacture radio button get back from test report page
-					vendor_manufector_radios.filter('[value=Vendor]').prop('checked', true);					
+				if(vendor_or_manufacture_type == 'c' && vendor_or_manufacture_id != "") { // check vendor or manufacture radio button get back from test report page
+					vendor_manufector_radios.filter('[value=Client]').prop('checked', true);					
 					$('#ddl_div').show();
 					$('#ddl_Vendor_Manufacture').show();
-					get_Vendor_Manufacture(vendor_or_manufacture_id,vendor_or_manufacture_type);		
-				}else if(vendor_or_manufacture_type == 'f' && vendor_or_manufacture_id != ""){
-					vendor_manufector_radios.filter('[value=Manufacture]').prop('checked', true);					
-					$('#ddl_div').show();
-					$('#ddl_Vendor_Manufacture').show();
-					get_Vendor_Manufacture(vendor_or_manufacture_id,vendor_or_manufacture_type);	
+					get_Vendor_Manufacture(vendor_or_manufacture_id,vendor_or_manufacture_type);
+					radio_client_vendor = "c";	
 				}
 			}			
-						
+			var SELECT_URL;			
 			//get date from back buttn through report details page and display selected data back		
 			if((from_date && to_date && radio_client_vendor) || search_report_no){								
 				//var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
+				
 				if(radio_search_value == 'report_search'){ 					
-					SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
-					
-				} else{
-					if(radio_client_vendor == "Vendor"){
-						radio_client_vendor = "v";
-					}else if(radio_client_vendor == "Manufacture"){
-						radio_client_vendor = "f";
-					}else if(radio_client_vendor == "Client"){
-						radio_client_vendor = "c";
-					}
-					SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=date&reportno=&datefrom="+from_date+"&dateto="+to_date+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+vendor_or_manufacture_id;
+					SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult_Manufacture?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
+				} else {										
+					SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult_Manufacture?searchchoice=date&reportno=&datefrom="+from_date+"&dateto="+to_date+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+vendor_or_manufacture_id;
 				}
+				
 				$("#loading_txt").show();
 				$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
 				$.ajax({ 
@@ -210,7 +209,7 @@
 							}
 							var ROW;
 							if(this.Status == 'OPEN'){
-								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
+								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'ON HOLD'){								
 								$('#dialog').attr('title',this.Hold_Reason);	
 								var numberreport = this.Report_Number;
@@ -219,7 +218,7 @@
 								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + report + " class=dialog style=display:none>Reason:<p id=hold_reason_"+report+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+report+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
-								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
+								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 								//ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:35%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:30%'>"+this.Status+"</td></tr>"
 							}														
 							$('#report_row').append(ROW);
@@ -292,7 +291,7 @@
 			
 			//validate drop down for non client selection else client is default
 			var ddl_Vendor_Manufacture_value;
-			if(radio_client_vendor != 'Client'){
+			if(radio_client_vendor == 'Client'){
 				 ddl_Vendor_Manufacture_value = $("#ddl_Vendor_Manufacture").val();
 				if(ddl_Vendor_Manufacture_value == ""){
 					alert('You must select '+radio_client_vendor+ ' name');
@@ -300,12 +299,10 @@
 				}
 			}
 			if(radio_search_value == 'date_search'){
-				if(radio_client_vendor == "Vendor"){
-					radio_client_vendor = "v";
-				}else if(radio_client_vendor == "Manufacture"){
-					radio_client_vendor = "f";
-				}else if(radio_client_vendor == "Client"){
+				 if(radio_client_vendor == "Client"){
 					radio_client_vendor = "c";
+				}else{
+					radio_client_vendor = "";
 				}
 			}			
 			
@@ -315,9 +312,10 @@
 		   //var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+select_date_from+"&clientid="+client_id;
 		   
 		   if(radio_search_value == 'report_search'){ 
-				SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
-           } else{
-				SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=date&reportno=&datefrom="+select_date_from+"&dateto="+select_date_to+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+ddl_Vendor_Manufacture_value;
+				SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult_Manufacture?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
+           } else{							
+				//SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=date&reportno=&datefrom="+select_date_from+"&dateto="+select_date_to+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+ddl_Vendor_Manufacture_value;
+				SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult_Manufacture?searchchoice=date&reportno=&datefrom="+select_date_from+"&dateto="+select_date_to+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+ddl_Vendor_Manufacture_value;
 		   }
 			$.ajax({ 
                 type: 'GET',
@@ -349,7 +347,7 @@
 							}							
 							var ROW;
 							if(this.Status == 'OPEN'){
-								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
+								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'ON HOLD'){								
 								$('#dialog').attr('title',this.Hold_Reason);
 								var numberreport = this.Report_Number;
@@ -358,7 +356,7 @@
 								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + report + " class=dialog style=display:none>Reason:<p id=hold_reason_"+report+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+report+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
-								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
+								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 								//ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:35%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:30%'>"+this.Status+"</td></tr>"
 							}							
 							$('#report_row').append(ROW);
@@ -375,31 +373,30 @@
 			window.alert("Reason:\n"+REASON +"\n\nDescription:\n"+DESC);		
 		}		
 		//populate Manufacture and Vendor drop down
-        function get_Vendor_Manufacture(Id,client_type){
+        function get_Vendor_Manufacture(Id,client_type){		
 			
-			if(client_type != "" && client_type == 'v'){
-				radio_client_vendor = "Vendor";
-			}else if(client_type != "" && client_type == 'f'){
-				radio_client_vendor = "Manufacture";
-			}
-			
+			if(client_type != "" && client_type == 'c'){
+				radio_client_vendor = "Client";
+			}			
 			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");          
 		   //var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+select_date_from+"&clientid="+client_id;
-		   var URL = "http://14.140.163.70:151/WebService.asmx/Get_Associationed_Name?vendor_or_manufacture_type="+radio_client_vendor+"&client_id="+client_id; 	
+		   //var URL = "http://14.140.163.70:151/WebService.asmx/Get_Associationed_Name?vendor_or_manufacture_type="+radio_client_vendor+"&client_id="+client_id;
+			var URL = "http://14.140.163.70:151/WebService.asmx/Get_client_Name_Manufacture?vendor_or_manufacture_type=Manufacture&client_id="+client_id;;
             $.ajax({ 
                 type: 'GET',
                 url: URL,  
                   
                 success:function (data) {					
-					$(data).each(function() {
+					$(data).each(function() {					
 						var select_index;
-						if(this.no_vendor_manufacture != '1'){
-							if($.trim(this.Associationed_Id) == $.trim(Id)){
+						if(this.no_client != '1'){
+							if($.trim(this.Client_id) == $.trim(Id)){
 								select_index =	"selected=selected";
 							}else{
 								select_index = " ";
 							}
-							var options = "<option value='"+$.trim(this.Associationed_Id)+"' "+select_index+">"+this.Associationed_Name+"</option>";
+							
+							var options = "<option value='"+$.trim(this.Client_id)+"' "+select_index+">"+this.client+"</option>";
 							$(options).appendTo('#ddl_Vendor_Manufacture');
 						}else{
 							alert("No Data Found!");
@@ -440,16 +437,16 @@
 							  <label for="">From:</label>&nbsp;<input type="text" id="datepicker_from" readonly>&nbsp;
 							  <label for="">To:</label>&nbsp;<input type="text" id="datepicker_to" readonly>						  
 							</div><br/>
-							<div style="text-align: left;line-height:1.60;">
-							  <input type="radio" name="check_sub" value="Client" checked="checked"/>&nbsp;Client
-							  &nbsp;&nbsp;<input type="radio" name="check_sub" value="Vendor"/>&nbsp;Vendor
-							  &nbsp;&nbsp;<input type="radio" name="check_sub" value="Manufacture"/>&nbsp;Manufacturer	
+							<div style="text-align: left;line-height:0.9;">
+							  <input type="checkbox" name="check_sub" value="Client"/>&nbsp;&nbsp;Client
+							  <!--&nbsp;&nbsp;<input type="radio" name="check_sub" value="Vendor"/>&nbsp;Vendor
+							  &nbsp;&nbsp;<input type="radio" name="check_sub" value="Manufacture"/>&nbsp;Manufacturer-->	
 							  <br/>
 							</div>
 							<br/>
 							<div class="ui action input-append date" id="ddl_div" style="display:none">								
-							<select id="ddl_Vendor_Manufacture"></select>
-						</div>
+								<select id="ddl_Vendor_Manufacture"></select>
+							</div>
 						</div>	
 						<br/>						
 						<label for="" id="lbl_search_by_report">Enter report number to search reports...</label>
