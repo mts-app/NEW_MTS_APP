@@ -40,6 +40,7 @@
 		var search_report_no;
 		var from_date;
 		var to_date;
+		var checkbox_value;
 		var vendor_or_manufacture_id;
 		var radio_search_value = "report_search"; //for storing value for selected search type i.e. date or report no
 		var radio_client_vendor = "Client"; //stores value for selected client type i.e. client, vendor etc.
@@ -125,6 +126,9 @@
 			if(getUrlVars()["vendor_or_manufacture_type"]){ 
 				vendor_or_manufacture_type = getUrlVars()["vendor_or_manufacture_type"];				
 			}
+			if(getUrlVars()["checkbox_value"]){
+				checkbox_value = getUrlVars()["checkbox_value"];				
+			}
 			
 			//check report number by default
 			var radios = $('input:radio[name=search]');
@@ -201,8 +205,10 @@
 							if(this.Result == null){
 								this.Result = "In process";								
 							}
-							if(this.issuedate == null || this.duedate == null){
-								this.issuedate = "N/A";
+							if(this.issuedate == null){
+								this.issuedate = "N/A";								
+							}
+							if(this.duedate == null){
 								this.duedate = "N/A";
 							}
 							if(this.Result == 'FAIL'){
@@ -229,8 +235,13 @@
               });
 			}
 			if(Client_Name != ""){
+				var loggedin_as;
 				var clientname = decodeURI(Client_Name);
+				if(checkbox_value != 'vendor' || checkbox_value != 'factory'){
+					loggedin_as = "Logged in as client!";
+				}
 				$('#welcome_txt').html("Welcome <span style=color:blue>"+clientname+"!</span>");
+				$('#loggedin_as').html("<span style=color:blue>"+loggedin_as+"</span>");
 				$('#logout_txt').show();				
 			}			
 		 });
@@ -340,8 +351,10 @@
 							if(this.Result == null){
 								this.Result = "In process";								
 							}
-							if(this.issuedate == null || this.duedate == null){
-								this.issuedate = "N/A";
+							if(this.issuedate == null){
+								this.issuedate = "N/A";								
+							}
+							if(this.duedate == null){
 								this.duedate = "N/A";
 							}
 							if(this.Result == 'FAIL'){
@@ -428,6 +441,7 @@
 		<div class="container">
 			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();" style="display:none">Logout!</div></a><br/>
 			<div style="float:right" id="welcome_txt"></div>
+			<div id="loggedin_as"></div>
 			<div class="align-center">
 				<div class="ui warning form">
 				    <div class="field">							
@@ -443,7 +457,7 @@
 							<div style="text-align: left;line-height:1.60;">
 							  <input type="radio" name="check_sub" value="Client" checked="checked"/>&nbsp;Client
 							  &nbsp;&nbsp;<input type="radio" name="check_sub" value="Vendor"/>&nbsp;Vendor
-							  &nbsp;&nbsp;<input type="radio" name="check_sub" value="Manufacture"/>&nbsp;Manufacturer	
+							  &nbsp;&nbsp;<input type="radio" name="check_sub" value="Manufacture"/>&nbsp;Factory	
 							  <br/>
 							</div>
 							<br/>
