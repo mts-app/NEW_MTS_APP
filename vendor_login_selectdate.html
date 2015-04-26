@@ -387,7 +387,7 @@
 		function show_popup(id){
 			var REASON =  $("#hold_reason_"+id).html();
 			var DESC =  $("#hold_desc_"+id).html();
-			window.alert("Reason:\n"+REASON +"\n\nDescription:\n"+DESC);		
+			window.alert("On Hold Reason:\n"+REASON +"\n\nDescription:\n"+DESC);		
 		}		
 		//populate Manufacture and Vendor drop down
         function get_Vendor_Manufacture(Id,client_type){		
@@ -440,8 +440,8 @@
 	<main>
 		<div class="container">
 			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();" style="display:none">Logout!</div></a><br/>
-			<div style="float:right" id="welcome_txt"></div>
-			<div id="loggedin_as"></div>
+			<div style="float:right" id="welcome_txt"></div></br>
+			<div id="loggedin_as" style="float:right"></div>
 			<div class="align-center">
 				<div class="ui warning form">
 				    <div class="field">							
@@ -484,7 +484,7 @@
 				  <thead>
 				    <tr>
 				      <th><div id="report_no">Report No.<br/>Result</div></th>
-					  <th>Issue Date<br/>Logout Date</th>					
+					  <th>Est.Issue Date<br/>Logout Date</th>					
 				      <th>Report<br/>Status</th>					  
 				    </tr>
 				  </thead>
