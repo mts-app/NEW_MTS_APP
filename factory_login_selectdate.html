@@ -45,6 +45,7 @@
 		var radio_search_value = "report_search"; //for storing value for selected search type i.e. date or report no
 		var radio_client_vendor = "Client"; //stores value for selected client type i.e. client, vendor etc.
 		var vendor_or_manufacture_type;
+		var ddl_Vendor_Manufacture_value;
 		$( document ).ready(function() {			
 			var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
@@ -52,6 +53,12 @@
 				window.location="index.html";
 				return false;
 			}		
+			
+			//Get client drop down value
+			$('#ddl_Vendor_Manufacture').on('change', function() {			  
+			  ddl_Vendor_Manufacture_value = this.value;
+			  
+			})
 			
 			//show n hide on selection of date and report number radio button
 			$("input[name='search']").click(function () {				
@@ -96,11 +103,13 @@
 					radio_client_vendor = $(this).val();
 					$('#ddl_Vendor_Manufacture').show();
 					$('#ddl_div').show();
-					get_Vendor_Manufacture("","");	
+					get_Vendor_Manufacture("","");
+						
 				}else{
 					$('#ddl_Vendor_Manufacture').hide();
 					$('#ddl_div').hide();
-					radio_client_vendor="";
+					radio_client_vendor = "";
+					ddl_Vendor_Manufacture_value = "";
 				}					
 			});
 						
@@ -200,8 +209,10 @@
 							if(this.Result == null){
 								this.Result = "In process";								
 							}
-							if(this.issuedate == null || this.duedate == null){
-								this.issuedate = "N/A";
+							if(this.issuedate == null){
+								this.issuedate = "N/A";								
+							}
+							if(this.duedate == null){
 								this.duedate = "N/A";
 							}
 							if(this.Result == 'FAIL'){
@@ -228,8 +239,13 @@
               });
 			}
 			if(Client_Name != ""){
+				var loggedin_as;
 				var clientname = decodeURI(Client_Name);
+				if(checkbox_value == 'factory'){
+					loggedin_as = "Logged in as factory!";
+				}
 				$('#welcome_txt').html("Welcome <span style=color:blue>"+clientname+"!</span>");
+				$('#loggedin_as').html("<span style=color:blue>"+loggedin_as+"</span>");
 				$('#logout_txt').show();				
 			}			
 		 });
@@ -246,7 +262,7 @@
 		}
 		 
 		 //display report details
-        function getReportNo(){					
+        function getReportNo(){				
 			$(".table-container").hide();			
 			$('#report_result').hide();			
 			$('#no_records').hide();
@@ -290,16 +306,17 @@
 			}
 			
 			//validate drop down for non client selection else client is default
-			var ddl_Vendor_Manufacture_value;
-			if(radio_client_vendor == 'Client'){
-				 ddl_Vendor_Manufacture_value = $("#ddl_Vendor_Manufacture").val();
-				if(ddl_Vendor_Manufacture_value == ""){
+			
+			//if(radio_client_vendor == 'Client'){
+				 ddl_Vendor_Manufacture_value = $("#ddl_Vendor_Manufacture").val();				
+				if(ddl_Vendor_Manufacture_value == 'noselect'){
 					alert('You must select '+radio_client_vendor+ ' name');
 					return false;
 				}
-			}
+			//}
+			//If click on date search and client drop down select some value
 			if(radio_search_value == 'date_search'){
-				 if(radio_client_vendor == "Client"){
+				if(ddl_Vendor_Manufacture_value != '' && ddl_Vendor_Manufacture_value != 'noselect' && ddl_Vendor_Manufacture_value != null){
 					radio_client_vendor = "c";
 				}else{
 					radio_client_vendor = "";
@@ -338,14 +355,16 @@
 							if(this.Result == null){
 								this.Result = "In process";								
 							}
-							if(this.issuedate == null || this.duedate == null){
-								this.issuedate = "N/A";
+							if(this.issuedate == null){
+								this.issuedate = "N/A";								
+							}
+							if(this.duedate == null){
 								this.duedate = "N/A";
 							}
 							if(this.Result == 'FAIL'){
 								this.Result = "<font color=red>"+this.Result+"</font>";
 							}							
-							var ROW;
+							var ROW;							
 							if(this.Status == 'OPEN'){
 								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'ON HOLD'){								
@@ -360,10 +379,13 @@
 								//ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:35%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:30%'>"+this.Status+"</td></tr>"
 							}							
 							$('#report_row').append(ROW);
+							
 						}						 
 					});                    
                 },
-            });        
+				
+            }); 
+				
         }
 		
 		//show pop up dialog for hold on status
@@ -404,7 +426,7 @@
 						};						
 					});
 					if(Id == ""){						
-						var option = "<option selected='selected' value=''>select</option>";
+						var option = "<option selected='selected' value='noselect'>select</option>";
 						$(option).appendTo('#ddl_Vendor_Manufacture');	
 					}					
                 },
@@ -425,6 +447,7 @@
 		<div class="container">
 			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();" style="display:none">Logout!</div></a><br/>
 			<div style="float:right" id="welcome_txt"></div>
+			<div id="loggedin_as"></div>
 			<div class="align-center">
 				<div class="ui warning form">
 				    <div class="field">							

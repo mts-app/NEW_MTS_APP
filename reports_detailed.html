@@ -46,9 +46,20 @@
 		var radio_search_value = getUrlVars()["radio_search_value"];
 		
 	    if(client_name != ""){
+			var loggedin_as;
 			var clientname = decodeURI(client_name);
+			if(checkbox_value == 'factory'){
+				loggedin_as = "Logged in as factory!";
+			}else if(checkbox_value == 'vendor'){
+				loggedin_as = "Logged in as vendor!";
+			}else{
+				loggedin_as = "Logged in as client!";
+			}
 			$('#welcome_text').html("Welcome <span style=color:blue>"+clientname+"!</span>");
+			$('#loggedin_as').html("<span style=color:blue>"+loggedin_as+"</span>");
 			$('#logout_txt').show();
+			
+			
 	    } 
 		// create url for back button
 		var back_url;
@@ -92,7 +103,7 @@
 								this.Rating = "In process";								
 							}
 							if(this.Result == 'FAIL'){
-								RATING = this.Result +" ("+this.Rating+")";
+								RATING = this.Result +" ("+$.trim(this.Rating)+")";
 							}else{
 								RATING = this.Result;
 							}							
@@ -119,10 +130,11 @@
 	<main>
 		<div class="container">
 			<a href="index.html"><div style="float:right" id="logout_txt" onclick="logout();" style="display:none">Logout!</div></a><br/>
-			<div style="float:right" id="welcome_text"></div>
+			<div style="float:right" id="welcome_text"></div><br/>
+			<div style="float:right" id="loggedin_as"></div>
 			<div class="align-center">
 				<div class="ui warning form">
-				    <div class="field" style="margin: 0 0 -1em;">
+				    <br/><div class="field" style="margin: 0 0 -1em;">
 				    	 <label for="" id="report_no_for"></label>
 				    </div>
 				</div>
