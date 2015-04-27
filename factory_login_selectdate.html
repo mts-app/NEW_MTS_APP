@@ -223,14 +223,20 @@
 								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'ON HOLD'){								
 								$('#dialog').attr('title',this.Hold_Reason);	
-								var numberreport = this.Report_Number;
-								var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
-								this.Status = "<a onclick=show_popup("+report+")>"+this.Status+"</a>";
-								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + report + " class=dialog style=display:none>Reason:<p id=hold_reason_"+report+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+report+">"+this.Hold_Desc+"</p></div></td></tr>";
+								//var numberreport = this.Report_Number;
+								//var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
+								this.Status = "<a onclick=show_popup('"+this.Report_Number+"')>"+this.Status+"</a>";
+								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a onclick=show_popup('"+this.Report_Number+"')>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + this.Report_Number + " class=dialog style=display:none>Reason:<p id=hold_reason_"+this.Report_Number+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+this.Report_Number+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
 								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 								//ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:35%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:30%'>"+this.Status+"</td></tr>"
+							}else if(this.Status == 'CANCEL'){
+								$('#report_result').hide();
+								$('#report_row').html("");
+								$('#no_records').show();
+								$(".table-container").hide();	
+								$('#no_records').html("<span style='color:red'><img src='img/ErrorIcon.gif'/> No Record Found!</span>");
 							}														
 							$('#report_row').append(ROW);
 						}						 
@@ -293,7 +299,7 @@
 					return false;
 				}			
 				if(days>=15){
-					alert ("You can select date maximum up to 14 days!");
+					alert ("You can select date maximum up to 15 days!");
 					$("#loading_txt").hide();
 					$('#datepicker_to').val("");
 					$('#datepicker_to').focus();
@@ -369,14 +375,20 @@
 								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'ON HOLD'){								
 								$('#dialog').attr('title',this.Hold_Reason);
-								var numberreport = this.Report_Number;
-								var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
-								this.Status = "<a onclick=show_popup("+report+")>"+this.Status+"</a>";
-								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + report + " class=dialog style=display:none>Reason:<p id=hold_reason_"+report+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+report+">"+this.Hold_Desc+"</p></div></td></tr>";
+								//var numberreport = this.Report_Number;
+								//var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
+								this.Status = "<a onclick=show_popup('"+this.Report_Number+"')>"+this.Status+"</a>";
+								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a onclick=show_popup('"+this.Report_Number+"')>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + this.Report_Number + " class=dialog style=display:none>Reason:<p id=hold_reason_"+this.Report_Number+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+this.Report_Number+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
 								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 								//ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:35%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:30%'>"+this.Status+"</td></tr>"
+							}else if(this.Status == 'CANCEL'){
+								$('#report_result').hide();
+								$('#report_row').html("");
+								$('#no_records').show();
+								$(".table-container").hide();	
+								$('#no_records').html("<span style='color:red'><img src='img/ErrorIcon.gif'/> No Record Found!</span>");
 							}							
 							$('#report_row').append(ROW);
 							
