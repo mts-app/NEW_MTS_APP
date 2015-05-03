@@ -46,6 +46,19 @@
 		var radio_client_vendor = "Client"; //stores value for selected client type i.e. client, vendor etc.
 		var vendor_or_manufacture_type;
 		$( document ).ready(function() {			
+			var d = new Date();
+			d = d.getTime();
+			if ($('#reloadValue').val().length == 0)
+			{
+					$('#reloadValue').val(d);                        
+			}
+			else
+			{
+					$('body').hide();										
+					window.location = "index.html";
+					$('#reloadValue').val(d);	
+			}
+			
 			var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
@@ -502,6 +515,7 @@
 				  </thead>
 				  <tbody id="report_row">			   	   
 				  </tbody>
+				  <input type="hidden" id="reloadValue" value="">
 				</table>				
 			</div>
 		</div>

@@ -24,6 +24,19 @@
 		}		
 		
 		$( document ).ready(function() {
+			var d = new Date();
+                d = d.getTime();
+                if ($('#reloadValue').val().length == 0)
+                {
+                        $('#reloadValue').val(d);                        
+                }
+                else
+                {
+                        $('body').hide();
+						//$('#reloadValue').val('');						
+                        window.location = "index.html";
+						$('#reloadValue').val(d);
+                }
 			var isLogin = localStorage.getItem('loggedin');			
 			if(!isLogin){
 				$('#logout_txt').hide();
@@ -150,6 +163,7 @@
 				  </thead>
 				  <tbody id="test_result">				   			    
 				  </tbody>
+				  <input type="hidden" id="reloadValue" value="">
 				</table>
 				<a href="" class="ui positive button" id="back_btn" style="display:none">&lsaquo; &nbsp;Back</a>
 			</div>

@@ -12,10 +12,13 @@
 	<script type="text/javascript">      
          var client_checkbox;
 		 $( document ).ready(function() {
+				
+				$('#factory_check').prop('checked', false);
+				$('#vendor_check').prop('checked', false);
 				$("#loading_txt").hide(); 
 				
 				$('#vendor_check').click(function() {
-					$('#factory_check').prop('checked', false);;
+					$('#factory_check').prop('checked', false);
 					client_checkbox = 'vendor';
 				});
 				$('#factory_check').click(function(){					
