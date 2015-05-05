@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">	
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+	<script type="text/javascript" src="backfix.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>	
 	<style>		
 	#datepicker_from, #datepicker_to {
@@ -34,6 +35,18 @@
 			}
 			return vars;
 		}
+		bajb_backdetect.OnBack = function()
+			{
+				localStorage.clear();
+				window.location="index.html";
+				return false;
+			}
+		var isLogin = localStorage.getItem('loggedin');			
+			  if(!isLogin){
+				$('#logout_txt').hide();
+				window.location="index.html";
+				return false;
+			}
         
 		var client_id;
 		var Client_Name;
@@ -47,19 +60,7 @@
 		var vendor_or_manufacture_type;
 		var ddl_Vendor_Manufacture_value;
 		$( document ).ready(function() {			
-			var d = new Date();
-			d = d.getTime();
-			if ($('#reloadValue').val().length == 0)
-			{
-					$('#reloadValue').val(d);                        
-			}
-			else
-			{
-					$('body').hide();
-					//$('#reloadValue').val('');						
-					window.location = "index.html";
-					$('#reloadValue').val(d);
-			}
+			
 			var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
