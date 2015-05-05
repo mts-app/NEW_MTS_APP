@@ -23,12 +23,6 @@
 	}	
 	</style>
 	<script type="text/javascript">
-		bajb_backdetect.OnBack = function()
-			{
-				window.location="index.html";
-				return false;
-			}
-				
 		function getUrlVars()
 		{
 			var vars = [], hash;
@@ -41,6 +35,20 @@
 			}
 			return vars;
 		}
+		bajb_backdetect.OnBack = function()
+			{
+				localStorage.clear();
+				window.location="index.html";
+				return false;
+			}
+		var isLogin = localStorage.getItem('loggedin');			
+			  if(!isLogin){
+				$('#logout_txt').hide();
+				window.location="index.html";
+				return false;
+			}	
+				
+		
         
 		var client_id;
 		var Client_Name;
