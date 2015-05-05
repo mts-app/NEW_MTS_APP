@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">	
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+	<script type="text/javascript" src="backfix.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>	
 	<style>		
 	#datepicker_from, #datepicker_to {
@@ -22,6 +23,11 @@
 	}	
 	</style>
 	<script type="text/javascript">
+		bajb_backdetect.OnBack = function()
+			{
+				alert('You clicked it!');
+			}
+				
 		function getUrlVars()
 		{
 			var vars = [], hash;
@@ -46,18 +52,6 @@
 		var radio_client_vendor = "Client"; //stores value for selected client type i.e. client, vendor etc.
 		var vendor_or_manufacture_type;
 		$( document ).ready(function() {			
-			var d = new Date();
-			d = d.getTime();
-			if ($('#reloadValue').val().length == 0)
-			{
-					$('#reloadValue').val(d);                        
-			}
-			else
-			{
-					$('body').hide();										
-					window.location = "index.html";
-					$('#reloadValue').val(d);	
-			}
 			
 			var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
