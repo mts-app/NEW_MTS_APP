@@ -96,7 +96,7 @@
                 success:function (data) {
 					$("#loading_image").hide();
 					$(data).each(function() {
-						$('#report_no_for').html("Report Number "+report_number);
+						$('#report_no_for').html("Report Number:"+report_number);
 						if(this.test_status == '0'){
 							$('#test_result_row').hide();
 							$('#test_result').html("");
