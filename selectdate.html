@@ -9,8 +9,10 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">	
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 	<script type="text/javascript" src="backfix.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="js/sweetalert.min.js"></script>	
 	<style>		
 	#datepicker_from, #datepicker_to {
 	    background: white url(img/CalendarIconsSmallRed.png) right no-repeat;
@@ -39,7 +41,7 @@
 			{
 				localStorage.clear();
 				window.location="index.html";
-				return false;
+				//return false;
 			}
 		var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
@@ -413,7 +415,8 @@
 		function show_popup(id){
 			var REASON =  $("#hold_reason_"+id).html();
 			var DESC =  $("#hold_desc_"+id).html();
-			window.alert("On Hold Reason:\n"+REASON +"\n\nDescription:\n"+DESC);		
+			swal("On Hold Reason:\n"+REASON, "Description:\n"+DESC)
+			//window.alert("On Hold Reason:\n"+REASON +"\n\nDescription:\n"+DESC);		
 		}		
 		//populate Manufacture and Vendor drop down
         function get_Vendor_Manufacture(Id,client_type){
