@@ -441,20 +441,20 @@ body.stop-scrolling {
     top: 70%; } }
 
 .showSweetAlert[data-animation=pop] {
-  -webkit-animation: showSweetAlert 0.3s;
-  animation: showSweetAlert 0.3s; }
+  -webkit-animation: none;
+  animation: none; }
 
 .showSweetAlert[data-animation=none] {
   -webkit-animation: none;
   animation: none; }
 
 .showSweetAlert[data-animation=slide-from-top] {
-  -webkit-animation: slideFromTop 0.3s;
-  animation: slideFromTop 0.3s; }
+  -webkit-animation: none;
+  animation: none; }
 
 .showSweetAlert[data-animation=slide-from-bottom] {
-  -webkit-animation: slideFromBottom 0.3s;
-  animation: slideFromBottom 0.3s; }
+  -webkit-animation: none;
+  animation: none; }
 
 .hideSweetAlert[data-animation=pop] {
   -webkit-animation: hideSweetAlert 0.2s;
