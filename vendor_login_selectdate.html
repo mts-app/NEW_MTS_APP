@@ -39,13 +39,13 @@
 			{
 				localStorage.clear();
 				window.location="index.html";
-				return false;
+				//return false;
 			}
 		var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
 				window.location="index.html";
-				return false;
+				//return false;
 			}
         
 		var client_id;
@@ -65,7 +65,7 @@
 			  if(!isLogin){
 				$('#logout_txt').hide();
 				window.location="index.html";
-				return false;
+				//return false;
 			}
 				
 			//Get client drop down value
@@ -413,7 +413,19 @@
 		function show_popup(id){
 			var REASON =  $("#hold_reason_"+id).html();
 			var DESC =  $("#hold_desc_"+id).html();
-			window.alert("On Hold Reason:\n"+REASON +"\n\nDescription:\n"+DESC);		
+			var hold_str= "<strong>On Hold Reason:</strong><br/>"+REASON+"<br/><br/><strong>Description:</strong><br/>"+DESC;
+			$.noty.closeAll();
+				var n = noty({
+				text: hold_str,
+				buttons: [
+					{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+							$noty.close();
+								
+						}
+					},					
+				],				
+			});
+			//window.alert("On Hold Reason:\n"+REASON +"\n\nDescription:\n"+DESC);		
 		}		
 		//populate Manufacture and Vendor drop down
         function get_Vendor_Manufacture(Id,client_type){		
