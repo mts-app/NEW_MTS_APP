@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type">
     <meta charset="utf-8">
-	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			//prevent screen bouncing
+			var xStart, yStart = 0; 
+			document.addEventListener('touchstart',function(e) {
+				xStart = e.touches[0].screenX;
+				yStart = e.touches[0].screenY;
+			});
+			 
+			document.addEventListener('touchmove',function(e) {
+				var xMovement = Math.abs(e.touches[0].screenX - xStart);
+				var yMovement = Math.abs(e.touches[0].screenY - yStart);
+				if((xMovement * 3) > yMovement) {
+					e.preventDefault();
+				}
+			});		
+			// End bouncing	
+		});
+	</script>
 </head>
 <body>
 	<header>
