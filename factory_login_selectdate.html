@@ -437,6 +437,19 @@
 					},					
 				],				
 			});					
+		}
+		//show alert messages
+		function show_alert(msg){				
+			$.noty.closeAll();
+				var n = noty({
+				text: msg,
+				buttons: [
+					{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+							$noty.close();								
+						}
+					},					
+				],				
+			});			
 		}		
 		//populate Manufacture and Vendor drop down
         function get_Vendor_Manufacture(Id,client_type){		
