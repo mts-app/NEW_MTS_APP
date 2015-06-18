@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type">
     <meta charset="utf-8">
-	<title></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/normalize.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/semantic.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script type="text/javascript">
-	
+	<script type="text/javascript" src="js/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript">	
 		$( document ).ready(function() {
+			//prevent screen bouncing
+			var xStart, yStart = 0; 
+			document.addEventListener('touchstart',function(e) {
+				xStart = e.touches[0].screenX;
+				yStart = e.touches[0].screenY;
+			});
+			 
+			document.addEventListener('touchmove',function(e) {
+				var xMovement = Math.abs(e.touches[0].screenX - xStart);
+				var yMovement = Math.abs(e.touches[0].screenY - yStart);
+				if((xMovement * 3) > yMovement) {
+					e.preventDefault();
+				}
+			});		
+			// End bouncing
 			$("#loading_txt").hide();
 			
 		 });        
@@ -25,27 +37,32 @@
 			var confirm_password = $.trim($('#confirm_password').val());
            
             if(user_name ==''){
-                alert('You must enter your name!');
+				show_alert('You must enter your name!');
+                //alert('You must enter your name!');
                 return false;
             }
 			if(user_email ==''){
-                alert('You must enter email address!');
+				show_alert('You must enter email address!');
+                //alert('You must enter email address!');
                 return false;
             }
 			if(user_phone == ''){
-                alert('You must enter phone number!');
+				show_alert('You must enter phone number!');
+                //alert('You must enter phone number!');
                 return false;                
             } 
 			if(user_email != ""){
 				var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-				if (!filter.test(user_email)) {						
-					alert("Please enter valid email-address");
+				if (!filter.test(user_email)) {	
+					show_alert('Please enter valid email-address');
+					//alert("Please enter valid email-address");
 					return false;
 				}
 			}
 			
 			if(user_password != confirm_password){
-                alert('Confirm Password, MISMATCH!');
+				show_alert('Confirm Password, MISMATCH!');
+                //alert('Confirm Password, MISMATCH!');
                 return false;                
             } 
 			var user_fullname;
@@ -56,7 +73,8 @@
 			var numbers = /^[0-9]+$/;
 			if(!user_phone.match(numbers))  
 			{
-				alert("Mobile number should be numeric only.");
+				show_alert('Mobile number should be numeric only.');
+				//alert("Mobile number should be numeric only.");
 				return false;
 			}	
            
@@ -73,15 +91,19 @@
 					$(data).each(function() {						
 						
 						if($.trim(this.User_Verify_Status) == '1'){
-						   alert('You have been verified successfully.');
+						  show_alert('You have been verified successfully.');	
+						   //alert('You have been verified successfully.');
 						   window.location= "login.html";						
 						}else if($.trim(this.user_already_verified) == '1'){
-							alert("Already registered, ready for login.");
+							show_alert('Already registered, ready for login.');
+							//alert("Already registered, ready for login.");
 							window.location= "login.html";
 						}else if($.trim(this.User_exists) == '0'){
-							alert("Email-address or Mobile number does not match. Please enter correct information.");
+							show_alert('Email-address or Mobile number does not match. Please enter correct information.');
+							//alert("Email-address or Mobile number does not match. Please enter correct information.");
 						}else{ 
-							alert('Something went wrong. Please try after some time. Either email address or mobile number you provided are not verified. Please provide another one.');
+							show_alert('Something went wrong. Please try after some time. Either email address or mobile number you provided are not verified. Please provide another one.');
+							//alert('Something went wrong. Please try after some time. Either email address or mobile number you provided are not verified. Please provide another one.');
 							return false;					  
 						} 
 					});                    
@@ -92,6 +114,18 @@
 			if(obj.value!="") {
 				obj.value =obj.value.toUpperCase();
 			}
+		}
+		function show_alert(msg){				
+			$.noty.closeAll();
+				var n = noty({
+				text: msg,
+				buttons: [
+					{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+							$noty.close();								
+						}
+					},					
+				],				
+			});			
 		}
     </script>
 </head>
@@ -106,7 +140,7 @@
 			<div class="align-center">
 				<div class="ui warning form">
 					<div  class="field" style="float:right" >
-				  		<a href="login.html"><strong>Login</strong></a>
+				  		<a href="index.html"><img src="img/home.jpg" width="60px" height="29px" /></a>
 				    </div>
 					<div class="field">
 						<label for="">Title</label>
