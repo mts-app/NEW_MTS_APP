@@ -291,10 +291,12 @@
 			// check validation if date search is applied	
 			if(radio_search_value == 'date_search'){
 				if(select_date_from == ""){
-					alert("You did not select from date!");
+					show_alert('You did not select from date!');
+					//alert("You did not select from date!");
 					return false;
 				}else if(select_date_to == ""){
-					alert("You did not select to date!");
+					show_alert('You did not select to date!');
+					//alert("You did not select to date!");
 					return false;
 				}
 				$( "#datepicker_from" ).datepicker({ dateFormat: 'dd-mm-yy' });
@@ -305,11 +307,13 @@
 				if (start<=end) {
 					days   = (end - start)/1000/60/60/24;			
 				}else{
-					alert("'From date' should be greater then 'to date'");
+					show_alert("'From date' should be greater then 'to date'");
+					//alert("'From date' should be greater then 'to date'");
 					return false;
 				}			
 				if(days>=15){
-					alert ("You can select date maximum up to 15 days!");
+					show_alert("You can select date maximum up to 15 days!");
+					//alert ("You can select date maximum up to 15 days!");
 					$("#loading_txt").hide();
 					$('#datepicker_to').val("");
 					$('#datepicker_to').focus();
@@ -317,7 +321,8 @@
 				}			
 			} 
 			if(radio_search_value == 'report_search' && search_report_no == ""){ // check validation if report search is applied 				
-				alert("You must enter report number!");
+				show_alert("You must enter report number!");
+				//alert("You must enter report number!");
 				return false;
 			}
 			
@@ -326,7 +331,9 @@
 			if(radio_client_vendor != 'Client'){
 				 ddl_Vendor_Manufacture_value = $("#ddl_Vendor_Manufacture").val();
 				if(ddl_Vendor_Manufacture_value == ""){
-					alert('You must select '+radio_client_vendor+ ' name');
+					var radio_client_str = 'You must select '+radio_client_vendor+ ' name';
+					//alert('You must select '+radio_client_vendor+ ' name');
+					show_alert(radio_client_str);
 					return false;
 				}
 			}
@@ -417,15 +424,25 @@
 				text: hold_str,
 				buttons: [
 					{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
-							$noty.close();
-								
+							$noty.close();								
 						}
 					},					
 				],				
-			});
-			
-			//window.alert("On Hold Reason:\n"+REASON +"\n\nDescription:\n"+DESC);		
-		}		
+			});				
+		}
+		//show alert messages
+		function show_alert(msg){				
+			$.noty.closeAll();
+				var n = noty({
+				text: msg,
+				buttons: [
+					{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+							$noty.close();								
+						}
+					},					
+				],				
+			});			
+		}	
 		//populate Manufacture and Vendor drop down
         function get_Vendor_Manufacture(Id,client_type){
 			
@@ -454,7 +471,8 @@
 							var options = "<option value='"+$.trim(this.Associationed_Id)+"' "+select_index+">"+this.Associationed_Name+"</option>";
 							$(options).appendTo('#ddl_Vendor_Manufacture');
 						}else{
-							alert("No Data Found!");
+							//alert("No Data Found!");
+							show_alert('No Data Found!');
 							return false;
 						};						
 					});
