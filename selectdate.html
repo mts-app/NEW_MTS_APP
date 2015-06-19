@@ -267,6 +267,12 @@
 						}						 
 					});                    
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
               });
 			}
 			if(Client_Name != ""){
@@ -426,9 +432,14 @@
 						}						 
 					});                    
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
             });        
-        }
-		
+        }		
 		//show pop up dialog for hold on status
 		function show_popup(id){
 			var REASON =  $("#hold_reason_"+id).html();
@@ -496,6 +507,12 @@
 						$(option).appendTo('#ddl_Vendor_Manufacture');	
 					}					
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
             });        
         }		
 		function logout(){

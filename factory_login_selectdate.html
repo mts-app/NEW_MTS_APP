@@ -271,6 +271,12 @@
 						}						 
 					});                    
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
               });
 			}
 			if(Client_Name != ""){
@@ -364,7 +370,6 @@
 					radio_client_vendor = "";
 				}
 			}			
-			
 			var SELECT_URL;
 			$("#loading_txt").show();
 			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 				
@@ -431,9 +436,13 @@
 						}						 
 					});                    
                 },
-				
-            }); 
-				
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
+            }); 				
         }
 		
 		//show pop up dialog for hold on status
@@ -447,25 +456,12 @@
 				buttons: [
 					{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
 							$noty.close();
-								
 						}
 					},					
 				],				
 			});					
 		}
-		//show alert messages
-		function show_alert(msg){				
-			$.noty.closeAll();
-				var n = noty({
-				text: msg,
-				buttons: [
-					{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
-							$noty.close();								
-						}
-					},					
-				],				
-			});			
-		}		
+				
 		//populate Manufacture and Vendor drop down
         function get_Vendor_Manufacture(Id,client_type){		
 			
@@ -503,8 +499,27 @@
 						$(option).appendTo('#ddl_Vendor_Manufacture');	
 					}					
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
             });        
-        }		
+        }
+		//show alert messages
+		function show_alert(msg){				
+			$.noty.closeAll();
+				var n = noty({
+				text: msg,
+				buttons: [
+					{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+							$noty.close();								
+						}
+					},					
+				],				
+			});			
+		}
 		function logout(){
 			localStorage.clear();
 		}		

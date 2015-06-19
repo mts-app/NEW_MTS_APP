@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/semantic.css">
 	<script type="text/javascript" src="backfix.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.noty.packaged.min.js"></script>
 	<script type="text/javascript">
 		function getUrlVars()
 		{
@@ -140,8 +141,26 @@
 							$('#back_btn').attr('href',back_url);	
 					});                    
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
             });        
-        });
+        });		
+		function show_alert(msg){				
+			$.noty.closeAll();
+				var n = noty({
+				text: msg,
+				buttons: [
+					{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+							$noty.close();								
+						}
+					},					
+				],				
+			});			
+		}
 		
 		function logout(){
 			localStorage.clear();

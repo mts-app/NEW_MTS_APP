@@ -76,7 +76,7 @@
 				show_alert('Mobile number should be numeric only.');
 				//alert("Mobile number should be numeric only.");
 				return false;
-			}	
+			}
            
 		   //var signup_url = "http://online.mts-global.com/lims-app/WebService.asmx/UpdateSignup?mail="+user_email+"&mobilenumber="+user_phone+"&username="+user_fullname+"&userpassword="+user_password;
 		   var signup_url = "http://14.140.163.70:151/WebService.asmx/UpdateSignup?mail="+user_email+"&mobilenumber="+user_phone+"&username="+user_fullname+"&userpassword="+user_password;
@@ -108,6 +108,12 @@
 						} 
 					});                    
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
             });        
         }
 		function ValidateInput(obj){
