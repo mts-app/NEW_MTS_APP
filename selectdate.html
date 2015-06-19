@@ -58,7 +58,22 @@
 		var radio_search_value = "report_search"; //for storing value for selected search type i.e. date or report no
 		var radio_client_vendor = "Client"; //stores value for selected client type i.e. client, vendor etc.
 		var vendor_or_manufacture_type;
-		$( document ).ready(function() {			
+		$( document ).ready(function() {
+			//prevent screen bouncing
+			var xStart, yStart = 0; 
+			document.addEventListener('touchstart',function(e) {
+				xStart = e.touches[0].screenX;
+				yStart = e.touches[0].screenY;
+			});
+			 
+			document.addEventListener('touchmove',function(e) {
+				var xMovement = Math.abs(e.touches[0].screenX - xStart);
+				var yMovement = Math.abs(e.touches[0].screenY - yStart);
+				if((xMovement * 3) > yMovement) {
+					e.preventDefault();
+				}
+			});		
+			// End bouncing	
 			
 			var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
