@@ -267,6 +267,12 @@
 						}						 
 					});                    
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
               });
 			}
 			if(Client_Name != ""){
@@ -427,6 +433,12 @@
 							}						 
 						});										
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
             });        
         }
 		
@@ -496,6 +508,12 @@
 						$(option).appendTo('#ddl_Vendor_Manufacture');	
 					}					
                 },
+				error: function (jqXHR, exception) { 
+                   if (jqXHR.status === 0 || exception === 'timeout') {
+					  show_alert('Your internet connection is unstable!');
+					  $("#loading_txt").hide();	
+                   } 
+               }
             });        
         }		
 		function logout(){
