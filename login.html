@@ -79,8 +79,7 @@
                 url: login_url,                  
                 success:function (data) {
 					$("#loading_txt").hide();
-					$(data).each(function() {						
-												
+					$(data).each(function() {												
 						if($.trim(this.User_Verify_Status) == "true"){
 						    localStorage.setItem('loggedin', 1);
 						    if(client_checkbox == 'vendor'){
