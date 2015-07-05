@@ -205,7 +205,6 @@
 			var SELECT_URL;			
 			//get date from back buttn through report details page and display selected data back		
 			if((from_date && to_date && radio_client_vendor) || search_report_no){				
-				
 				if(radio_search_value == 'report_search'){ 					
 					SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult_Manufacture?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
 				} else {										

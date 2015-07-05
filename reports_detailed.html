@@ -96,8 +96,7 @@
 			back_url = "selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value;   
 		}       
 		
-		var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
-			
+		var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;			
             $.ajax({ 
                 type: 'GET',
                 url: test_result_url,              
