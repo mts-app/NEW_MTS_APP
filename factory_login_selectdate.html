@@ -38,14 +38,12 @@
 		bajb_backdetect.OnBack = function()
 			{
 				localStorage.clear();
-				window.location="index.html";
-				//return false;
+				window.location="index.html";				
 			}
 		var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
-				window.location="index.html";
-				//return false;
+				window.location="index.html";				
 			}
         
 		var client_id;
@@ -101,8 +99,7 @@
 				radio_search_value = $(this).val();
 				if(radio_search_value == 'date_search'){
 					$('#report_result').hide();
-					$('#no_records').hide();
-					//$('input:radio[value=client]').prop('checked', true);					
+					$('#no_records').hide();									
 					$('#lbl_search_by_date').show();
 					$('#search_by_date').show();				
 					$('#lbl_search_by_report').hide();
@@ -207,8 +204,7 @@
 			}			
 			var SELECT_URL;			
 			//get date from back buttn through report details page and display selected data back		
-			if((from_date && to_date && radio_client_vendor) || search_report_no){								
-				//var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
+			if((from_date && to_date && radio_client_vendor) || search_report_no){				
 				
 				if(radio_search_value == 'report_search'){ 					
 					SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult_Manufacture?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
@@ -251,15 +247,13 @@
 							if(this.Status == 'OPEN'){
 								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'ON HOLD'){								
-								$('#dialog').attr('title',this.Hold_Reason);	
-								//var numberreport = this.Report_Number;
-								//var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
+								$('#dialog').attr('title',this.Hold_Reason);								
 								this.Status = "<a onclick=show_popup('"+this.Report_Number+"')>"+this.Status+"</a>";
 								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a onclick=show_popup('"+this.Report_Number+"')>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + this.Report_Number + " class=dialog style=display:none>Reason:<p id=hold_reason_"+this.Report_Number+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+this.Report_Number+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
 								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
-								//ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:35%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:30%'>"+this.Status+"</td></tr>"
+								
 							}else if(this.Status == 'CANCEL'){
 								$('#report_result').hide();
 								$('#report_row').html("");
@@ -315,12 +309,10 @@
 			
 			// check validation if date search is applied	
 			if(radio_search_value == 'date_search'){
-				if(select_date_from == ""){
-					//alert("You did not select from date!");
+				if(select_date_from == ""){					
 					show_alert('You did not select from date!');
 					return false;
-				}else if(select_date_to == ""){
-					//alert("You did not select to date!");
+				}else if(select_date_to == ""){					
 					show_alert('You did not select to date!');
 					return false;
 				}
@@ -331,13 +323,11 @@
 				var days;		
 				if (start<=end) {
 					days   = (end - start)/1000/60/60/24;			
-				}else{
-					//alert("'From date' should be greater then 'to date'");
+				}else{					
 					show_alert("'From date' should be greater then 'to date'");
 					return false;
 				}			
-				if(days>=15){
-					//alert ("You can select date maximum up to 15 days!");
+				if(days>=15){					
 					show_alert("You can select date maximum up to 15 days!");
 					$("#loading_txt").hide();
 					$('#datepicker_to').val("");
@@ -346,22 +336,19 @@
 				}			
 			} 
 			if(radio_search_value == 'report_search' && search_report_no == ""){ // check validation if report search is applied 				
-				//alert("You must enter report number!");
+				
 				show_alert("You must enter report number!");
 				return false;
 			}
 			
-			//validate drop down for non client selection else client is default
-			
-			//if(radio_client_vendor == 'Client'){
-				 ddl_Vendor_Manufacture_value = $("#ddl_Vendor_Manufacture").val();				
+			//validate drop down for non client selection else client is default			
+				ddl_Vendor_Manufacture_value = $("#ddl_Vendor_Manufacture").val();				
 				if(ddl_Vendor_Manufacture_value == 'noselect'){
-					var radio_client_str = 'You must select '+radio_client_vendor+ ' name';
-					//alert('You must select '+radio_client_vendor+ ' name');
+					var radio_client_str = 'You must select '+radio_client_vendor+ ' name';					
 					show_alert(radio_client_str);
 					return false;
 				}
-			//}
+			
 			//If click on date search and client drop down select some value
 			if(radio_search_value == 'date_search'){
 				if(ddl_Vendor_Manufacture_value != '' && ddl_Vendor_Manufacture_value != 'noselect' && ddl_Vendor_Manufacture_value != null){
@@ -372,13 +359,12 @@
 			}			
 			var SELECT_URL;
 			$("#loading_txt").show();
-			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 				
-		   //var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+select_date_from+"&clientid="+client_id;
+			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 		   
 		   
 		   if(radio_search_value == 'report_search'){ 
 				SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult_Manufacture?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
            } else{							
-				//SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=date&reportno=&datefrom="+select_date_from+"&dateto="+select_date_to+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+ddl_Vendor_Manufacture_value;
+				
 				SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult_Manufacture?searchchoice=date&reportno=&datefrom="+select_date_from+"&dateto="+select_date_to+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+ddl_Vendor_Manufacture_value;
 		   }
 			$.ajax({ 
@@ -415,15 +401,13 @@
 							if(this.Status == 'OPEN'){
 								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'ON HOLD'){								
-								$('#dialog').attr('title',this.Hold_Reason);
-								//var numberreport = this.Report_Number;
-								//var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
+								$('#dialog').attr('title',this.Hold_Reason);								
 								this.Status = "<a onclick=show_popup('"+this.Report_Number+"')>"+this.Status+"</a>";
 								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a onclick=show_popup('"+this.Report_Number+"')>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + this.Report_Number + " class=dialog style=display:none>Reason:<p id=hold_reason_"+this.Report_Number+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+this.Report_Number+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
 								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
-								//ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:35%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:30%'>"+this.Status+"</td></tr>"
+								
 							}else if(this.Status == 'CANCEL'){
 								$('#report_result').hide();
 								$('#report_row').html("");
@@ -468,9 +452,7 @@
 			if(client_type != "" && client_type == 'c'){
 				radio_client_vendor = "Client";
 			}			
-			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");          
-		   //var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+select_date_from+"&clientid="+client_id;
-		   //var URL = "http://14.140.163.70:151/WebService.asmx/Get_Associationed_Name?vendor_or_manufacture_type="+radio_client_vendor+"&client_id="+client_id;
+			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 	   
 			var URL = "http://14.140.163.70:151/WebService.asmx/Get_client_Name_Manufacture?vendor_or_manufacture_type=Manufacture&client_id="+client_id;;
             $.ajax({ 
                 type: 'GET',
@@ -488,8 +470,7 @@
 							
 							var options = "<option value='"+$.trim(this.Client_id)+"' "+select_index+">"+this.client+"</option>";
 							$(options).appendTo('#ddl_Vendor_Manufacture');
-						}else{
-							//alert("No Data Found!");
+						}else{							
 							show_alert('No Data Found!');
 							return false;
 						};						
@@ -549,9 +530,7 @@
 							  <label for="">To:</label>&nbsp;<input type="text" id="datepicker_to" readonly>						  
 							</div><br/>
 							<div style="text-align: left;line-height:0.9;">
-							  <input type="checkbox" name="check_sub" value="Client"/>&nbsp;&nbsp;Client
-							  <!--&nbsp;&nbsp;<input type="radio" name="check_sub" value="Vendor"/>&nbsp;Vendor
-							  &nbsp;&nbsp;<input type="radio" name="check_sub" value="Manufacture"/>&nbsp;Manufacturer-->	
+							  <input type="checkbox" name="check_sub" value="Client"/>&nbsp;&nbsp;Client							 	
 							  <br/>
 							</div>
 							<br/>

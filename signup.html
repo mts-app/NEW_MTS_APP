@@ -37,32 +37,27 @@
 			var confirm_password = $.trim($('#confirm_password').val());
            
             if(user_name ==''){
-				show_alert('You must enter your name!');
-                //alert('You must enter your name!');
+				show_alert('You must enter your name!');               
                 return false;
             }
 			if(user_email ==''){
-				show_alert('You must enter email address!');
-                //alert('You must enter email address!');
+				show_alert('You must enter email address!');             
                 return false;
             }
 			if(user_phone == ''){
-				show_alert('You must enter phone number!');
-                //alert('You must enter phone number!');
+				show_alert('You must enter phone number!');              
                 return false;                
             } 
 			if(user_email != ""){
 				var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
 				if (!filter.test(user_email)) {	
-					show_alert('Please enter valid email-address');
-					//alert("Please enter valid email-address");
+					show_alert('Please enter valid email-address');					
 					return false;
 				}
 			}
 			
 			if(user_password != confirm_password){
-				show_alert('Confirm Password, MISMATCH!');
-                //alert('Confirm Password, MISMATCH!');
+				show_alert('Confirm Password, MISMATCH!');               
                 return false;                
             } 
 			var user_fullname;
@@ -73,12 +68,10 @@
 			var numbers = /^[0-9]+$/;
 			if(!user_phone.match(numbers))  
 			{
-				show_alert('Mobile number should be numeric only.');
-				//alert("Mobile number should be numeric only.");
+				show_alert('Mobile number should be numeric only.');				
 				return false;
-			}
-           
-		   //var signup_url = "http://online.mts-global.com/lims-app/WebService.asmx/UpdateSignup?mail="+user_email+"&mobilenumber="+user_phone+"&username="+user_fullname+"&userpassword="+user_password;
+			}           
+		   
 		   var signup_url = "http://14.140.163.70:151/WebService.asmx/UpdateSignup?mail="+user_email+"&mobilenumber="+user_phone+"&username="+user_fullname+"&userpassword="+user_password;
             $("#loading_txt").show();
 			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
@@ -91,19 +84,15 @@
 					$(data).each(function() {						
 						
 						if($.trim(this.User_Verify_Status) == '1'){
-						  show_alert('You have been verified successfully.');	
-						   //alert('You have been verified successfully.');
+						  show_alert('You have been verified successfully.');						  
 						   window.location= "login.html";						
 						}else if($.trim(this.user_already_verified) == '1'){
-							show_alert('Already registered, ready for login.');
-							//alert("Already registered, ready for login.");
+							show_alert('Already registered, ready for login.');						
 							window.location= "login.html";
 						}else if($.trim(this.User_exists) == '0'){
-							show_alert('Email-address or Mobile number does not match. Please enter correct information.');
-							//alert("Email-address or Mobile number does not match. Please enter correct information.");
+							show_alert('Email-address or Mobile number does not match. Please enter correct information.');							
 						}else{ 
-							show_alert('Something went wrong. Please try after some time. Either email address or mobile number you provided are not verified. Please provide another one.');
-							//alert('Something went wrong. Please try after some time. Either email address or mobile number you provided are not verified. Please provide another one.');
+							show_alert('Something went wrong. Please try after some time. Either email address or mobile number you provided are not verified. Please provide another one.');							
 							return false;					  
 						} 
 					});                    

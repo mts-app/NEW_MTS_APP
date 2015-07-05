@@ -38,14 +38,12 @@
 		bajb_backdetect.OnBack = function()
 			{
 				localStorage.clear();
-				window.location="index.html";
-				//return false;
+				window.location="index.html";				
 			}
 		var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
-				window.location="index.html";
-				//return false;
+				window.location="index.html";				
 			}		
         
 		var client_id;
@@ -78,8 +76,7 @@
 			var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
-				window.location="index.html";
-				//return false;
+				window.location="index.html";				
 			}		
 			
 			//show n hide on selection of date and report number radio button
@@ -247,15 +244,13 @@
 							if(this.Status == 'OPEN'){
 								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'ON HOLD'){								
-								$('#dialog').attr('title',this.Hold_Reason);	
-								//var numberreport = this.Report_Number;
-								//var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
+								$('#dialog').attr('title',this.Hold_Reason);								
 								this.Status = "<a onclick=show_popup('"+this.Report_Number+"')>"+this.Status+"</a>";
 								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a onclick=show_popup('"+this.Report_Number+"')>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + this.Report_Number + " class=dialog style=display:none>Reason:<p id=hold_reason_"+this.Report_Number+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+this.Report_Number+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
 								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
-								//ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:35%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:30%'>"+this.Status+"</td></tr>"
+								
 							}else if(this.Status == 'CANCEL'){
 								$('#report_result').hide();
 								$('#report_row').html("");
@@ -312,12 +307,10 @@
 			// check validation if date search is applied	
 			if(radio_search_value == 'date_search'){
 				if(select_date_from == ""){
-					show_alert('You did not select from date!');
-					//alert("You did not select from date!");
+					show_alert('You did not select from date!');					
 					return false;
 				}else if(select_date_to == ""){
-					show_alert('You did not select to date!');
-					//alert("You did not select to date!");
+					show_alert('You did not select to date!');					
 					return false;
 				}
 				$( "#datepicker_from" ).datepicker({ dateFormat: 'dd-mm-yy' });
@@ -328,13 +321,11 @@
 				if (start<=end) {
 					days   = (end - start)/1000/60/60/24;			
 				}else{
-					show_alert("'From date' should be greater then 'to date'");
-					//alert("'From date' should be greater then 'to date'");
+					show_alert("'From date' should be greater then 'to date'");					
 					return false;
 				}			
 				if(days>=15){
-					show_alert("You can select date maximum up to 15 days!");
-					//alert ("You can select date maximum up to 15 days!");
+					show_alert("You can select date maximum up to 15 days!");					
 					$("#loading_txt").hide();
 					$('#datepicker_to').val("");
 					$('#datepicker_to').focus();
@@ -342,8 +333,7 @@
 				}			
 			} 
 			if(radio_search_value == 'report_search' && search_report_no == ""){ // check validation if report search is applied 				
-				show_alert("You must enter report number!");
-				//alert("You must enter report number!");
+				show_alert("You must enter report number!");				
 				return false;
 			}
 			
@@ -352,8 +342,7 @@
 			if(radio_client_vendor != 'Client'){
 				 ddl_Vendor_Manufacture_value = $("#ddl_Vendor_Manufacture").val();
 				if(ddl_Vendor_Manufacture_value == ""){
-					var radio_client_str = 'You must select '+radio_client_vendor+ ' name';
-					//alert('You must select '+radio_client_vendor+ ' name');
+					var radio_client_str = 'You must select '+radio_client_vendor+ ' name';					
 					show_alert(radio_client_str);
 					return false;
 				}
@@ -370,8 +359,7 @@
 			
 			var SELECT_URL;
 			$("#loading_txt").show();
-			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 				
-		   //var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+select_date_from+"&clientid="+client_id;
+			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 		   
 		   
 		   if(radio_search_value == 'report_search'){ 
 				SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
@@ -412,15 +400,12 @@
 							if(this.Status == 'OPEN'){
 								ROW = "<tr style='background-color:#FFFF99;'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'ON HOLD'){								
-								$('#dialog').attr('title',this.Hold_Reason);
-								//var numberreport = this.Report_Number;
-								//var report = numberreport.slice(0, numberreport.lastIndexOf("-"));
+								$('#dialog').attr('title',this.Hold_Reason);								
 								this.Status = "<a onclick=show_popup('"+this.Report_Number+"')>"+this.Status+"</a>";
 								ROW = "<tr style='background-color:#FFB8B8;'><td style='text-align:left;width:35%'><a onclick=show_popup('"+this.Report_Number+"')>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"<br/><div id=dialog_" + this.Report_Number + " class=dialog style=display:none>Reason:<p id=hold_reason_"+this.Report_Number+">"+this.Hold_Reason+"</p>Description:<p id=hold_desc_"+this.Report_Number+">"+this.Hold_Desc+"</p></div></td></tr>";
 							}else if(this.Status == 'CLOSED'){
 								this.Status = 'CLOSE';
 								ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"&vendor_or_manufacture_type="+radio_client_vendor+"&vendor_or_manufacture_id="+ddl_Vendor_Manufacture_value+"&radio_search_value="+radio_search_value+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:40%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:25%'>"+this.Status+"</td></tr>"
-								//ROW = "<tr class='positive'><td style='text-align:left;width:35%'><a href='reports_detailed.html?report_no="+this.Report_Number+"&clientname="+Client_Name+"&clientid="+client_id+"&from_date="+select_date_from+"&to_date="+select_date_to+"'>"+this.Report_Number+"</a><br/>"+this.Result+"</td><td style='text-align:left;width:35%'>"+this.duedate+"<br/>"+this.issuedate+"</td><td style='text-align:left;width:30%'>"+this.Status+"</td></tr>"
 							}else if(this.Status == 'CANCEL'){
 								$('#report_result').hide();
 								$('#report_row').html("");
@@ -478,8 +463,7 @@
 				radio_client_vendor = "Manufacture";
 			}
 			
-			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");          
-		   //var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+select_date_from+"&clientid="+client_id;
+			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 	   
 		   var URL = "http://14.140.163.70:151/WebService.asmx/Get_Associationed_Name?vendor_or_manufacture_type="+radio_client_vendor+"&client_id="+client_id; 	
             $.ajax({ 
                 type: 'GET',
@@ -496,8 +480,7 @@
 							}
 							var options = "<option value='"+$.trim(this.Associationed_Id)+"' "+select_index+">"+this.Associationed_Name+"</option>";
 							$(options).appendTo('#ddl_Vendor_Manufacture');
-						}else{
-							//alert("No Data Found!");
+						}else{							
 							show_alert('No Data Found!');
 							return false;
 						};						
