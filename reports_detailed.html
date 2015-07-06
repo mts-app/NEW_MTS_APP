@@ -26,12 +26,14 @@
 		bajb_backdetect.OnBack = function()
 			{
 				localStorage.clear();
-				window.location="index.html				
+				window.location="index.html";
+				//return false;
 			}
 		var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
-				window.location="index.html";				
+				window.location="index.html";
+				//return false;
 			}	
 		
 		$( document ).ready(function() {
@@ -53,7 +55,8 @@
 			var isLogin = localStorage.getItem('loggedin');			
 			if(!isLogin){
 				$('#logout_txt').hide();
-				window.location="index.html";			
+				window.location="index.html";
+				//return false;
 			}
 		//show ajax loading image
 		$("#loading_image").show();
@@ -94,9 +97,12 @@
 			back_url = "factory_login_selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value;   
 		}else{
 			back_url = "selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value;   
-		}       
-		
-		var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;			
+		}
+	    //var back_url = "selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value;   
+       
+		//var test_result_url = "http://online.mts-global.com/lims-app/WebService.asmx/TestResult?reportnumber="+report_number;
+		var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
+			
             $.ajax({ 
                 type: 'GET',
                 url: test_result_url,              
