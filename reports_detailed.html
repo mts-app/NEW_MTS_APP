@@ -11,6 +11,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.noty.packaged.min.js"></script>
 	<script type="text/javascript">
+		alert('me');
 		function getUrlVars()
 		{
 			var vars = [], hash;
@@ -23,18 +24,21 @@
 			}
 			return vars;
 		}
+		alert('me1');
 		bajb_backdetect.OnBack = function()
 			{
 				localStorage.clear();
-				window.location="index.html				
+				window.location="index.html";
+				//return false;
 			}
 		var isLogin = localStorage.getItem('loggedin');			
 			  if(!isLogin){
 				$('#logout_txt').hide();
-				window.location="index.html";				
+				window.location="index.html";
+				//return false;
 			}	
-		
-		$( document ).ready(function() {
+		alert('me2');
+		$( document ).ready(function() { alert('me3');
 			//prevent screen bouncing
 			var xStart, yStart = 0; 
 			document.addEventListener('touchstart',function(e) {
@@ -53,8 +57,10 @@
 			var isLogin = localStorage.getItem('loggedin');			
 			if(!isLogin){
 				$('#logout_txt').hide();
-				window.location="index.html";			
+				window.location="index.html";
+				return false;
 			}
+			alert('me4');
 		//show ajax loading image
 		$("#loading_image").show();
 		$("#loading_image").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span><br/>");
@@ -82,10 +88,9 @@
 			}
 			$('#welcome_text').html("Welcome <span style=color:blue>"+clientname+"!</span>");
 			$('#loggedin_as').html("<span style=color:blue>"+loggedin_as+"</span>");
-			$('#logout_txt').show();
-			
-			
+			$('#logout_txt').show();			
 	    } 
+		alert('me5');
 		// create url for back button
 		var back_url;
 		if(checkbox_value == "vendor"){
@@ -94,9 +99,12 @@
 			back_url = "factory_login_selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value;   
 		}else{
 			back_url = "selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value+"&checkbox_value="+checkbox_value;   
-		}       
-		
-		var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;			
+		}
+	    //var back_url = "selectdate.html?report_number="+report_number+"&ClientName="+client_name+"&clientid="+client_id+"&from_date="+from_date+"&to_date="+to_date+"&vendor_or_manufacture_type="+vendor_or_manufacture_type+"&vendor_or_manufacture_id="+vendor_or_manufacture_id+"&radio_search_value="+radio_search_value;   
+       
+		//var test_result_url = "http://online.mts-global.com/lims-app/WebService.asmx/TestResult?reportnumber="+report_number;
+		var test_result_url = "http://14.140.163.70:151/WebService.asmx/TestResult?reportnumber="+report_number;
+			
             $.ajax({ 
                 type: 'GET',
                 url: test_result_url,              
@@ -134,13 +142,7 @@
 							$('#back_btn').show();
 							$('#back_btn').attr('href',back_url);	
 					});                    
-                },
-				error: function (jqXHR, exception) { 
-                   if (jqXHR.status === 0 || exception === 'timeout') {
-					  show_alert('Your internet connection is unstable!');
-					  $("#loading_txt").hide();	
-                   } 
-               }
+                },				
             });        
         });		
 		function show_alert(msg){				
