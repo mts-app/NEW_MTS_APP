@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.mts-business-app"
-        version   = "1.0.1">
+        version   = "1.0.2">
 
     <name>Business Insight</name>
 
@@ -12,7 +12,6 @@
         Modern Testing Services (Global) Ltd.
     </description>
     <!-- <icon src="res/icon/android/icon-72-hdpi.png">-->
-
    
      <!--   If you do not want any permissions to be added to your app, add the
         following tag to your config.xml; you will still have the INTERNET
