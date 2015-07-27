@@ -23,7 +23,6 @@
 	}	
 	</style>
 	<script type="text/javascript">
-		document.body.style.marginTop = "20px";
 		function getUrlVars()
 		{
 			var vars = [], hash;
@@ -58,6 +57,8 @@
 		var radio_client_vendor = "Client"; //stores value for selected client type i.e. client, vendor etc.
 		var vendor_or_manufacture_type;
 		$( document ).ready(function() {
+			//top margin below status bar - ios
+			document.body.style.marginTop = "20px";
 			//prevent screen bouncing
 			var xStart, yStart = 0; 
 			document.addEventListener('touchstart',function(e) {

@@ -9,6 +9,8 @@
 	<script type="text/javascript" src="js/jquery.noty.packaged.min.js"></script>
 	<script type="text/javascript">	
 		$( document ).ready(function() {
+			//top margin below status bar - ios
+			document.body.style.marginTop = "20px";
 			//prevent screen bouncing
 			var xStart, yStart = 0; 
 			document.addEventListener('touchstart',function(e) {
