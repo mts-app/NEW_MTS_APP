@@ -198,7 +198,7 @@
 			if((from_date && to_date && radio_client_vendor) || search_report_no){								
 				//var date_select_url = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?date="+SELECT_DATE+"&clientid="+client_id;
 				if(radio_search_value == 'report_search'){ 					
-					SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
+					SELECT_URL = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
 					
 				} else{
 					if(radio_client_vendor == "Vendor"){
@@ -208,7 +208,7 @@
 					}else if(radio_client_vendor == "Client"){
 						radio_client_vendor = "c";
 					}
-					SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=date&reportno=&datefrom="+from_date+"&dateto="+to_date+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+vendor_or_manufacture_id;
+					SELECT_URL = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?searchchoice=date&reportno=&datefrom="+from_date+"&dateto="+to_date+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+vendor_or_manufacture_id;
 				}
 				$("#loading_txt").show();
 				$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>");
@@ -363,9 +363,9 @@
 			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 		   
 		   
 		   if(radio_search_value == 'report_search'){ 
-				SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
+				SELECT_URL = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?searchchoice=report&reportno="+search_report_no+"&datefrom=12/12/1970&clientid="+client_id+"&dateto=12/12/1970&vendor_or_manufacture_type=&CVMid=";
            } else{
-				SELECT_URL = "http://14.140.163.70:151/WebService.asmx/ReportResult?searchchoice=date&reportno=&datefrom="+select_date_from+"&dateto="+select_date_to+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+ddl_Vendor_Manufacture_value;
+				SELECT_URL = "http://online.mts-global.com/lims-app/WebService.asmx/ReportResult?searchchoice=date&reportno=&datefrom="+select_date_from+"&dateto="+select_date_to+"&clientid="+client_id+"&vendor_or_manufacture_type="+radio_client_vendor+"&CVMid="+ddl_Vendor_Manufacture_value;
 		   }
 			$.ajax({ 
                 type: 'GET',
@@ -465,7 +465,7 @@
 			}
 			
 			$("#loading_txt").html("<span><img  src='img/ajax-loader3.gif' /> loading... </span>"); 	   
-		   var URL = "http://14.140.163.70:151/WebService.asmx/Get_Associationed_Name?vendor_or_manufacture_type="+radio_client_vendor+"&client_id="+client_id; 	
+		   var URL = "http://online.mts-global.com/lims-app/WebService.asmx/Get_Associationed_Name?vendor_or_manufacture_type="+radio_client_vendor+"&client_id="+client_id; 	
             $.ajax({ 
                 type: 'GET',
                 url: URL,  
