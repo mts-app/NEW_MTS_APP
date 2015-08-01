@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.mts-business-app"
-        version   = "1.0.2">
+        version   = "1.0.1">
 
     <name>Business Insight</name>
 
@@ -68,14 +68,13 @@
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
     <!--
         <gap:plugin name="com.phonegap.plugins.barcodescanner" /> 
-	<icon src="icon.png" />   -->	
-	<icon src="res/icon/ios/icon-57.png"            gap:platform="ios"        width="57" height="57" />
-    <icon src="res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
-    <icon src="res/icon/ios/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
-    <icon src="res/icon/ios/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
-	<icon src="res/icon/ios/icon-60-2x.png"         gap:platform="ios"        width="120" height="120" />
-	<icon src="res/icon/ios/Icon-76.png"         	gap:platform="ios"        width="76" height="76" />
-	<icon src="res/icon/ios/Icon-76-2x.png"         gap:platform="ios"        width="152" height="152" />
+	<icon src="icon.png" />   -->
+	<icon src="res/icon/android/icon-36-ldpi.png"   	gap:platform="android"    gap:qualifier="ldpi" />
+    <icon src="res/icon/android/icon-48-mdpi.png"   	gap:platform="android"    gap:qualifier="mdpi" />
+    <icon src="res/icon/android/icon-72-hdpi.png"   	gap:platform="android"    gap:qualifier="hdpi" />
+    <icon src="res/icon/android/icon-96-xhdpi.png"  	gap:platform="android"    gap:qualifier="xhdpi" />	
+	<icon src="res/icon/android/icon-144-xxhdpi.png" 	gap:platform="android"    gap:qualifier="xxhdpi" />
+	<icon src="res/icon/android/icon-192-xxxhdpi.png"  	gap:platform="android"    gap:qualifier="xxxhdpi" />
     <!-- Define app icon for each platform. 
     <icon src="icon.png" />
     <icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:qualifier="ldpi" />
@@ -90,9 +89,12 @@
     -->
 
     <!-- Define app splash screen for each platform.  -->
+	<gap:splash src="res/screen/android/screen-ldpi-landscape.png"      gap:platform="android" gap:qualifier="port-ldpi" />
+	<gap:splash src="res/screen/android/screen-mdpi-landscape.png"      gap:platform="android" gap:qualifier="port-mdpi" />
     <gap:splash src="res/screen/android/screen-ldpi-portrait.png"       gap:platform="android" gap:qualifier="port-ldpi" />
     <gap:splash src="res/screen/android/screen-mdpi-portrait.png"       gap:platform="android" gap:qualifier="port-mdpi" />
     <gap:splash src="res/screen/android/screen-hdpi-portrait.png"       gap:platform="android" gap:qualifier="port-hdpi" />
+	<gap:splash src="res/screen/android/screen-hdpi-landscape.png"      gap:platform="android" gap:qualifier="port-hdpi" />
     <gap:splash src="res/screen/android/screen-xhdpi-portrait.png"      gap:platform="android" gap:qualifier="port-xhdpi" />
     <gap:splash src="res/screen/ios/screen-iphone-portrait.png"         gap:platform="ios"     width="320" height="480" />
     <gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png"      gap:platform="ios"     width="640" height="960" />
